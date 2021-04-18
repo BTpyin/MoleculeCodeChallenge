@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-class WeatherResponse:Object, Mappable {
+class WeatherResponse: Object, Mappable {
     
     @objc dynamic var cod: Int = 0
     @objc dynamic var message: String?

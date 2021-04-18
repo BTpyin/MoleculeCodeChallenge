@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E4412F4262C6B1A001D08C6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4412F3262C6B1A001D08C6 /* Router.swift */; };
+		0E4412F7262C6B3F001D08C6 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4412F6262C6B3F001D08C6 /* RootRouter.swift */; };
+		0E4412FC262C6C7C001D08C6 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4412FB262C6C7C001D08C6 /* BaseNavigationController.swift */; };
+		0E441300262C6CD8001D08C6 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4412FF262C6CD8001D08C6 /* RootNavigationController.swift */; };
+		0E441303262C6D86001D08C6 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E441302262C6D86001D08C6 /* StartViewController.swift */; };
+		0E49C687262C9F2800FD2670 /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49C686262C9F2800FD2670 /* RecentSearchTableViewCell.swift */; };
 		0E87C7F5262ACFFF00C74817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C7F4262ACFFF00C74817 /* AppDelegate.swift */; };
 		0E87C7F7262ACFFF00C74817 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C7F6262ACFFF00C74817 /* SceneDelegate.swift */; };
-		0E87C7F9262ACFFF00C74817 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C7F8262ACFFF00C74817 /* ViewController.swift */; };
+		0E87C7F9262ACFFF00C74817 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C7F8262ACFFF00C74817 /* BaseViewController.swift */; };
 		0E87C7FC262ACFFF00C74817 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E87C7FA262ACFFF00C74817 /* Main.storyboard */; };
 		0E87C7FE262AD00100C74817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E87C7FD262AD00100C74817 /* Assets.xcassets */; };
 		0E87C801262AD00100C74817 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E87C7FF262AD00100C74817 /* LaunchScreen.storyboard */; };
@@ -18,17 +24,23 @@
 		0E87C818262AD4A200C74817 /* UIViewDesignExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C817262AD4A200C74817 /* UIViewDesignExtension.swift */; };
 		0E87C81C262AD4DB00C74817 /* UIStoryboard+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C81B262AD4DB00C74817 /* UIStoryboard+Create.swift */; };
 		0E87C820262AD50400C74817 /* UIColorInitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C81F262AD50400C74817 /* UIColorInitExtension.swift */; };
-		A7571FEC91170E5C870EFF23 /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */; };
 		0E87C823262AD5C000C74817 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C822262AD5C000C74817 /* Api.swift */; };
 		0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C826262AD62200C74817 /* WeatherResponse.swift */; };
 		0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */; };
+		A7571FEC91170E5C870EFF23 /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E4412F3262C6B1A001D08C6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0E4412F6262C6B3F001D08C6 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		0E4412FB262C6C7C001D08C6 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		0E4412FF262C6CD8001D08C6 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
+		0E441302262C6D86001D08C6 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		0E49C686262C9F2800FD2670 /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		0E87C7F1262ACFFF00C74817 /* MoleculeCodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoleculeCodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E87C7F4262ACFFF00C74817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E87C7F6262ACFFF00C74817 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0E87C7F8262ACFFF00C74817 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0E87C7F8262ACFFF00C74817 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0E87C7FB262ACFFF00C74817 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E87C7FD262AD00100C74817 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E87C800262AD00100C74817 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +70,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E4412F2262C6B0A001D08C6 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0E4412F3262C6B1A001D08C6 /* Router.swift */,
+				0E4412F6262C6B3F001D08C6 /* RootRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		0E4412FA262C6C14001D08C6 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				0E4412FB262C6C7C001D08C6 /* BaseNavigationController.swift */,
+				0E4412FF262C6CD8001D08C6 /* RootNavigationController.swift */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
 		0E87C7E8262ACFFF00C74817 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +109,7 @@
 		0E87C7F3262ACFFF00C74817 /* MoleculeCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				0E4412F2262C6B0A001D08C6 /* Router */,
 				0E87C80F262AD3ED00C74817 /* Api+Sync */,
 				0E87C80A262AD38F00C74817 /* Model */,
 				0E87C80B262AD39D00C74817 /* View */,
@@ -104,6 +135,7 @@
 		0E87C80B262AD39D00C74817 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0E49C686262C9F2800FD2670 /* RecentSearchTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -111,7 +143,9 @@
 		0E87C80C262AD3A300C74817 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0E87C7F8262ACFFF00C74817 /* ViewController.swift */,
+				0E4412FA262C6C14001D08C6 /* NavigationController */,
+				0E87C7F8262ACFFF00C74817 /* BaseViewController.swift */,
+				0E441302262C6D86001D08C6 /* StartViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -200,7 +234,7 @@
 				};
 			};
 			buildConfigurationList = 0E87C7EC262ACFFF00C74817 /* Build configuration list for PBXProject "MoleculeCodeChallenge" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -278,11 +312,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E87C823262AD5C000C74817 /* Api.swift in Sources */,
+				0E441303262C6D86001D08C6 /* StartViewController.swift in Sources */,
 				0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */,
 				0E87C814262AD46900C74817 /* UIViewRoundCornerExtension.swift in Sources */,
-				0E87C7F9262ACFFF00C74817 /* ViewController.swift in Sources */,
+				0E4412F7262C6B3F001D08C6 /* RootRouter.swift in Sources */,
+				0E87C7F9262ACFFF00C74817 /* BaseViewController.swift in Sources */,
+				0E4412F4262C6B1A001D08C6 /* Router.swift in Sources */,
 				0E87C81C262AD4DB00C74817 /* UIStoryboard+Create.swift in Sources */,
 				0E87C820262AD50400C74817 /* UIColorInitExtension.swift in Sources */,
+				0E49C687262C9F2800FD2670 /* RecentSearchTableViewCell.swift in Sources */,
+				0E441300262C6CD8001D08C6 /* RootNavigationController.swift in Sources */,
+				0E4412FC262C6C7C001D08C6 /* BaseNavigationController.swift in Sources */,
 				0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */,
 				0E87C818262AD4A200C74817 /* UIViewDesignExtension.swift in Sources */,
 				0E87C7F5262ACFFF00C74817 /* AppDelegate.swift in Sources */,
