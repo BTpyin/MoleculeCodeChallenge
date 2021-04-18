@@ -10,6 +10,7 @@ target 'MoleculeCodeChallenge' do
 	pod 'RealmSwift'
 	pod 'RxSwift',    '~> 4.0'
 	pod 'RxCocoa',    '~> 4.0'
+	pod 'SwiftyJSON', '~> 4.0'
 	pod 'RxRealm'
 	pod 'Kingfisher', '~> 4.0'
   # Pods for MoleculeCodeChallenge

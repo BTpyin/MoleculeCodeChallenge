@@ -19,6 +19,9 @@
 		0E87C81C262AD4DB00C74817 /* UIStoryboard+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C81B262AD4DB00C74817 /* UIStoryboard+Create.swift */; };
 		0E87C820262AD50400C74817 /* UIColorInitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C81F262AD50400C74817 /* UIColorInitExtension.swift */; };
 		A7571FEC91170E5C870EFF23 /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */; };
+		0E87C823262AD5C000C74817 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C822262AD5C000C74817 /* Api.swift */; };
+		0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C826262AD62200C74817 /* WeatherResponse.swift */; };
+		0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		0E87C817262AD4A200C74817 /* UIViewDesignExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewDesignExtension.swift; sourceTree = "<group>"; };
 		0E87C81B262AD4DB00C74817 /* UIStoryboard+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Create.swift"; sourceTree = "<group>"; };
 		0E87C81F262AD50400C74817 /* UIColorInitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInitExtension.swift; sourceTree = "<group>"; };
+		0E87C822262AD5C000C74817 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		0E87C826262AD62200C74817 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataToRealm.swift; sourceTree = "<group>"; };
 		1567D21CC6001D0BAE6EA531 /* Pods-MoleculeCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoleculeCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B516D985165E3FF969333E1C /* Pods-MoleculeCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +96,7 @@
 		0E87C80A262AD38F00C74817 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0E87C826262AD62200C74817 /* WeatherResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -133,6 +140,8 @@
 		0E87C80F262AD3ED00C74817 /* Api+Sync */ = {
 			isa = PBXGroup;
 			children = (
+				0E87C822262AD5C000C74817 /* Api.swift */,
+				0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */,
 			);
 			path = "Api+Sync";
 			sourceTree = "<group>";
@@ -268,10 +277,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E87C823262AD5C000C74817 /* Api.swift in Sources */,
+				0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */,
 				0E87C814262AD46900C74817 /* UIViewRoundCornerExtension.swift in Sources */,
 				0E87C7F9262ACFFF00C74817 /* ViewController.swift in Sources */,
 				0E87C81C262AD4DB00C74817 /* UIStoryboard+Create.swift in Sources */,
 				0E87C820262AD50400C74817 /* UIColorInitExtension.swift in Sources */,
+				0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */,
 				0E87C818262AD4A200C74817 /* UIViewDesignExtension.swift in Sources */,
 				0E87C7F5262ACFFF00C74817 /* AppDelegate.swift in Sources */,
 				0E87C811262AD44D00C74817 /* UIViewShadowExtension.swift in Sources */,
