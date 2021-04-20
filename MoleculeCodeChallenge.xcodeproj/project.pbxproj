@@ -27,10 +27,11 @@
 		0E87C823262AD5C000C74817 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C822262AD5C000C74817 /* Api.swift */; };
 		0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C826262AD62200C74817 /* WeatherResponse.swift */; };
 		0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */; };
-		A7571FEC91170E5C870EFF23 /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */; };
+		56C27EA1FD9EA3F511589C6F /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		097A02A9135028DCE8910225 /* Pods-MoleculeCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		0E4412F3262C6B1A001D08C6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0E4412F6262C6B3F001D08C6 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		0E4412FB262C6C7C001D08C6 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -53,9 +54,8 @@
 		0E87C822262AD5C000C74817 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0E87C826262AD62200C74817 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataToRealm.swift; sourceTree = "<group>"; };
-		1567D21CC6001D0BAE6EA531 /* Pods-MoleculeCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
-		596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoleculeCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B516D985165E3FF969333E1C /* Pods-MoleculeCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		6D671BAB6948A03097314173 /* Pods-MoleculeCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoleculeCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7571FEC91170E5C870EFF23 /* Pods_MoleculeCodeChallenge.framework in Frameworks */,
+				56C27EA1FD9EA3F511589C6F /* Pods_MoleculeCodeChallenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 				0E87C7F3262ACFFF00C74817 /* MoleculeCodeChallenge */,
 				0E87C7F2262ACFFF00C74817 /* Products */,
 				F1125FA5E86BF7651689102B /* Pods */,
-				54F7C09DDC3633B8A8F6B92E /* Frameworks */,
+				1AAC38F1B3E1AB104CFB9005 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,10 +180,10 @@
 			path = "Api+Sync";
 			sourceTree = "<group>";
 		};
-		54F7C09DDC3633B8A8F6B92E /* Frameworks */ = {
+		1AAC38F1B3E1AB104CFB9005 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				596A94A158E0D985B555A917 /* Pods_MoleculeCodeChallenge.framework */,
+				962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -191,8 +191,8 @@
 		F1125FA5E86BF7651689102B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1567D21CC6001D0BAE6EA531 /* Pods-MoleculeCodeChallenge.debug.xcconfig */,
-				B516D985165E3FF969333E1C /* Pods-MoleculeCodeChallenge.release.xcconfig */,
+				6D671BAB6948A03097314173 /* Pods-MoleculeCodeChallenge.debug.xcconfig */,
+				097A02A9135028DCE8910225 /* Pods-MoleculeCodeChallenge.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -204,11 +204,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E87C805262AD00100C74817 /* Build configuration list for PBXNativeTarget "MoleculeCodeChallenge" */;
 			buildPhases = (
-				CAC79E26B4EE718D9ECB4473 /* [CP] Check Pods Manifest.lock */,
+				DE720B0EB484F2A2F7D33E6A /* [CP] Check Pods Manifest.lock */,
 				0E87C7ED262ACFFF00C74817 /* Sources */,
 				0E87C7EE262ACFFF00C74817 /* Frameworks */,
 				0E87C7EF262ACFFF00C74817 /* Resources */,
-				C46A8F3091E7030CA84ADE43 /* [CP] Embed Pods Frameworks */,
+				84E26A7B4744A1413D5DD784 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,7 +234,7 @@
 				};
 			};
 			buildConfigurationList = 0E87C7EC262ACFFF00C74817 /* Build configuration list for PBXProject "MoleculeCodeChallenge" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -265,7 +265,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C46A8F3091E7030CA84ADE43 /* [CP] Embed Pods Frameworks */ = {
+		84E26A7B4744A1413D5DD784 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -282,7 +282,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CAC79E26B4EE718D9ECB4473 /* [CP] Check Pods Manifest.lock */ = {
+		DE720B0EB484F2A2F7D33E6A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,13 +471,14 @@
 		};
 		0E87C806262AD00100C74817 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1567D21CC6001D0BAE6EA531 /* Pods-MoleculeCodeChallenge.debug.xcconfig */;
+			baseConfigurationReference = 6D671BAB6948A03097314173 /* Pods-MoleculeCodeChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9JQ7HF2Q6L;
 				INFOPLIST_FILE = MoleculeCodeChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -491,13 +492,14 @@
 		};
 		0E87C807262AD00100C74817 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B516D985165E3FF969333E1C /* Pods-MoleculeCodeChallenge.release.xcconfig */;
+			baseConfigurationReference = 097A02A9135028DCE8910225 /* Pods-MoleculeCodeChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9JQ7HF2Q6L;
 				INFOPLIST_FILE = MoleculeCodeChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

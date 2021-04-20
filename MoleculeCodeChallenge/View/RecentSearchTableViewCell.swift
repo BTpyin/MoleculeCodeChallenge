@@ -9,6 +9,8 @@ import UIKit
 
 class RecentSearchTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,5 +21,5 @@ class RecentSearchTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

@@ -31,10 +31,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGL-zj-MfZ">
-                                <rect key="frame" x="0.0" y="93" width="414" height="54"/>
+                                <rect key="frame" x="0.0" y="93" width="414" height="44"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZNL-Nx-rvD">
-                                        <rect key="frame" x="15" y="15.5" width="25" height="23"/>
+                                        <rect key="frame" x="15" y="10.5" width="25" height="23"/>
                                         <color key="tintColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ZNL-Nx-rvD" secondAttribute="height" multiplier="1:1" id="a6W-pX-cAK"/>
@@ -42,12 +42,16 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City name/ City Zipcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HjK-s6-ukW">
-                                        <rect key="frame" x="55" y="10" width="344" height="34"/>
+                                        <rect key="frame" x="55" y="5" width="344" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search" textContentType="location"/>
+                                        <connections>
+                                            <action selector="searchBarEndEditing:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="V8V-qr-djy"/>
+                                            <action selector="searchBarStartEditiing:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="Ca0-vg-N6S"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mZ-ob-mj3">
-                                        <rect key="frame" x="20" y="52" width="374" height="2"/>
+                                        <rect key="frame" x="20" y="42" width="374" height="2"/>
                                         <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="TI9-lb-vwh"/>
@@ -56,9 +60,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="HjK-s6-ukW" secondAttribute="bottom" constant="10" id="4mI-Cc-gZT"/>
+                                    <constraint firstAttribute="bottom" secondItem="HjK-s6-ukW" secondAttribute="bottom" constant="5" id="4mI-Cc-gZT"/>
                                     <constraint firstItem="ZNL-Nx-rvD" firstAttribute="centerY" secondItem="lGL-zj-MfZ" secondAttribute="centerY" id="BFi-FD-sQt"/>
-                                    <constraint firstItem="HjK-s6-ukW" firstAttribute="top" secondItem="lGL-zj-MfZ" secondAttribute="top" constant="10" id="M2R-G6-OPH"/>
+                                    <constraint firstItem="HjK-s6-ukW" firstAttribute="top" secondItem="lGL-zj-MfZ" secondAttribute="top" constant="5" id="M2R-G6-OPH"/>
                                     <constraint firstAttribute="trailing" secondItem="HjK-s6-ukW" secondAttribute="trailing" constant="15" id="Pzd-qo-x2l"/>
                                     <constraint firstAttribute="bottom" secondItem="7mZ-ob-mj3" secondAttribute="bottom" id="UfC-6s-lyd"/>
                                     <constraint firstItem="HjK-s6-ukW" firstAttribute="leading" secondItem="ZNL-Nx-rvD" secondAttribute="trailing" constant="15" id="XVL-7q-J3Q"/>
@@ -86,7 +90,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oi-tg-N6L">
-                                <rect key="frame" x="0.0" y="147" width="414" height="50.5"/>
+                                <rect key="frame" x="0.0" y="137" width="414" height="50.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szY-yd-OzR">
                                         <rect key="frame" x="99" y="10" width="105" height="30.5"/>
@@ -393,9 +397,6 @@
                                             <constraint firstAttribute="trailing" secondItem="4Hn-h0-ngs" secondAttribute="trailing" constant="20" id="y4j-iz-LGQ"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="35"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
@@ -414,27 +415,27 @@
                                 </constraints>
                             </scrollView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2ix-Gt-bSK">
-                                <rect key="frame" x="15" y="152" width="384" height="150"/>
+                                <rect key="frame" x="55" y="142" width="344" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="rKg-Yx-KLO"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentSearchTableViewCell" id="IEp-8D-qOk" customClass="RecentSearchTableViewCell" customModule="MoleculeCodeChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="384" height="57"/>
+                                        <rect key="frame" x="0.0" y="28" width="344" height="40.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IEp-8D-qOk" id="qpM-lJ-sW6">
-                                            <rect key="frame" x="0.0" y="0.0" width="384" height="57"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="344" height="40.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT2-Ms-9u6">
-                                                    <rect key="frame" x="30" y="18" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="30" y="11" width="242" height="18.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TfS-sN-gV2">
-                                                    <rect key="frame" x="342" y="17.5" width="22" height="22"/>
+                                                    <rect key="frame" x="302" y="9.5" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="khD-ZP-IUV"/>
                                                         <constraint firstAttribute="width" constant="22" id="lRe-5F-Ry8"/>
@@ -444,16 +445,25 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vT2-Ms-9u6" secondAttribute="bottom" constant="7" id="7qB-8B-ae0"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vT2-Ms-9u6" secondAttribute="bottom" id="7qB-8B-ae0"/>
                                                 <constraint firstAttribute="trailing" secondItem="TfS-sN-gV2" secondAttribute="trailing" constant="20" id="R9e-jo-X7Q"/>
                                                 <constraint firstItem="vT2-Ms-9u6" firstAttribute="leading" secondItem="qpM-lJ-sW6" secondAttribute="leadingMargin" constant="10" id="ev9-PJ-Gaw"/>
-                                                <constraint firstItem="vT2-Ms-9u6" firstAttribute="top" secondItem="qpM-lJ-sW6" secondAttribute="topMargin" constant="7" id="hBk-vc-xO0"/>
+                                                <constraint firstItem="vT2-Ms-9u6" firstAttribute="top" secondItem="qpM-lJ-sW6" secondAttribute="topMargin" id="hBk-vc-xO0"/>
                                                 <constraint firstItem="TfS-sN-gV2" firstAttribute="leading" secondItem="vT2-Ms-9u6" secondAttribute="trailing" constant="30" id="lnr-JQ-NdG"/>
                                                 <constraint firstItem="TfS-sN-gV2" firstAttribute="centerY" secondItem="vT2-Ms-9u6" secondAttribute="centerY" id="t7k-gZ-djH"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cancelButton" destination="TfS-sN-gV2" id="eHI-Iz-U0M"/>
+                                            <outlet property="locationLabel" destination="vT2-Ms-9u6" id="wkr-m7-TiT"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -475,7 +485,7 @@
                             <constraint firstItem="2ix-Gt-bSK" firstAttribute="trailing" secondItem="HjK-s6-ukW" secondAttribute="trailing" id="hys-Mk-wcf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hLs-QP-PLM" secondAttribute="bottom" id="opD-y9-y1f"/>
                             <constraint firstItem="hLs-QP-PLM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tRA-Ka-xKI"/>
-                            <constraint firstItem="2ix-Gt-bSK" firstAttribute="leading" secondItem="ZNL-Nx-rvD" secondAttribute="leading" id="uXE-5f-K0h"/>
+                            <constraint firstItem="2ix-Gt-bSK" firstAttribute="leading" secondItem="ZNL-Nx-rvD" secondAttribute="leading" constant="40" id="uXE-5f-K0h"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -496,6 +506,7 @@
                         <outlet property="maxTempLabel" destination="knJ-DF-f1Q" id="2ug-e5-S9U"/>
                         <outlet property="minTempLabel" destination="RMn-xZ-5gK" id="x6a-U8-vas"/>
                         <outlet property="recentSearchTableView" destination="2ix-Gt-bSK" id="0Hw-rK-gbS"/>
+                        <outlet property="scrollView" destination="hLs-QP-PLM" id="dgG-Uq-Qvn"/>
                         <outlet property="searchBarTextField" destination="HjK-s6-ukW" id="skA-fK-kyQ"/>
                         <outlet property="searchBarView" destination="lGL-zj-MfZ" id="VOo-gY-TVr"/>
                         <outlet property="searchByView" destination="4oi-tg-N6L" id="cHE-y9-zB6"/>
