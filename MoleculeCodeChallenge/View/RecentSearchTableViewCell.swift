@@ -11,15 +11,16 @@ class RecentSearchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    var rowNum = 0
+    
+    func removeRealmSearchRecord(record:String, completed: ((SyncDataFailReason?) -> Void)?){
+        SyncData().removeRecordToRealm(name: record, completed: completed)
     }
     
+    @IBAction func CancelButtonClicked(_ sender: Any) {
+        removeRealmSearchRecord(record: (self.locationLabel.text ?? "")){[weak self] (failReason) in
+            print(failReason)
+        }
+    }
 }

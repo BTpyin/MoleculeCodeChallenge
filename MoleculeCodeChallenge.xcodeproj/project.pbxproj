@@ -27,6 +27,7 @@
 		0E87C823262AD5C000C74817 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C822262AD5C000C74817 /* Api.swift */; };
 		0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C826262AD62200C74817 /* WeatherResponse.swift */; };
 		0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */; };
+		0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3199F262FF9D100286294 /* SearchRecord.swift */; };
 		56C27EA1FD9EA3F511589C6F /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		0E87C822262AD5C000C74817 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0E87C826262AD62200C74817 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataToRealm.swift; sourceTree = "<group>"; };
+		0EE3199F262FF9D100286294 /* SearchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecord.swift; sourceTree = "<group>"; };
 		6D671BAB6948A03097314173 /* Pods-MoleculeCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoleculeCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				0E87C826262AD62200C74817 /* WeatherResponse.swift */,
+				0EE3199F262FF9D100286294 /* SearchRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				0E4412FC262C6C7C001D08C6 /* BaseNavigationController.swift in Sources */,
 				0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */,
 				0E87C818262AD4A200C74817 /* UIViewDesignExtension.swift in Sources */,
+				0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */,
 				0E87C7F5262ACFFF00C74817 /* AppDelegate.swift in Sources */,
 				0E87C811262AD44D00C74817 /* UIViewShadowExtension.swift in Sources */,
 				0E87C7F7262ACFFF00C74817 /* SceneDelegate.swift in Sources */,
