@@ -36,7 +36,9 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     @IBOutlet weak var citynameView: UIView!
     @IBOutlet weak var zipcodeView: UIView!
     
-//    Weather Card
+    @IBOutlet weak var noRecordView: UIView!
+    
+    //    Weather Card
     @IBOutlet weak var weatherCardView: UIView!
     @IBOutlet weak var weatherCardTopSection: UIView!
     @IBOutlet weak var locationLabel: UILabel!
@@ -71,17 +73,12 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         viewModel?.fetchRecordFromRealm()
         
         viewModel?.cityNameOn.asObservable().subscribe(onNext:{ _ in
-            self.updateSearchByViews()
+            self.updateSearchBarAndSearchByViews()
         }).disposed(by: disposeBag)
         
-//        viewModel?.currentWeather.asObservable().subscribe(onNext: { weather in
-//            if (self.viewModel?.currentWeather.value?.cod != 200 ){
-//                self.showAlert("The input is not a valid value.")
-//            }else{
-//                self.weatherCardViewBind(weather: (self.viewModel?.currentWeather.value)!)
-//            }
-//        })
+
         Observable.changeset(from: (viewModel?.searchRecordFromRealm)!).subscribe(onNext: { results in
+            self.determineDisplayNoRecordOrCardView()
             self.recentSearchTableView.reloadData()
             print(self.viewModel?.searchRecordFromRealm)
         }).disposed(by: disposeBag)
@@ -89,7 +86,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         Observable.changeset(from: (viewModel?.currentWeatherFromRealm)!).subscribe(onNext: { results, changes in
             if let changes = changes {
               // it's an update
-              print(results)
+//              print(results)
               print("deleted: \(changes.deleted)")
               print("inserted: \(changes.inserted)")
               print("updated: \(changes.updated)")
@@ -104,7 +101,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                 }
             } else {
               // it's the initial data
-              print(results)
+//              print(results)
                 if (results.first?.cod != 200 ){
                     self.showAlert("The input is not a valid value.")
                     self.stopLoading()
@@ -115,10 +112,11 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     }
                 }
             }
+                    self.viewModel?.searchBarInput.value = ""
+                    self.searchBarTextField.text = ""
             
         }).disposed(by: disposeBag)
         
-        // Do any additional setup after loading the view.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -148,6 +146,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             }
             
         }
+
         searchBarTextField.resignFirstResponder()
         return true
 
@@ -170,11 +169,34 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         viewModel?.zipCodeOn.value.toggle()
     }
     
+    func determineDisplayNoRecordOrCardView(){
+        let recordCount = self.viewModel?.searchRecordFromRealm?.count ?? 0
+        let weatherCount = self.viewModel?.currentWeatherFromRealm?.count ?? 0
+        print(self.viewModel?.currentWeatherFromRealm?.count)
+        print(self.viewModel?.searchRecordFromRealm?.count)
+        if (((recordCount) == 0) && (weatherCount) == 0){
+            self.weatherCardView.isHidden = true
+            self.noRecordView.isHidden = false
+        }else{
+            self.weatherCardView.isHidden = false
+            self.noRecordView.isHidden = true
+        }
+    }
+    
     //uiBind
     
     func uiBind(){
+
         weatherCardView.roundCorners(cornerRadius: 25)
         weatherCardTopSection.roundCorners(cornerRadius: 25)
+        noRecordView.roundCorners(cornerRadius: 15)
+        noRecordView.layer.applySketchShadow(
+          color: .black,
+          alpha: 0.4,
+          x: 0,
+            y: 0.5,
+          blur: 6,
+            spread: 0)
         weatherCardView.layer.applySketchShadow(
           color: .black,
           alpha: 0.4,
@@ -189,6 +211,9 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
               y: 0.4,
             blur: 5,
               spread: 0)
+        searchBarTextField.borderColor = UIColor.init(red: 128, green: 92, blue: 230)
+        searchBarTextField.borderWidth = 1
+        searchBarTextField.roundCorners(cornerRadius: 15)
         
     }
     
@@ -210,21 +235,27 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
 
     
-    func updateSearchByViews(){
+    func updateSearchBarAndSearchByViews(){
         if ((viewModel?.cityNameOn.value)!){
             citynameView.backgroundColor = UIColor.init(red: 128, green: 92, blue: 230)
             zipcodeView.backgroundColor = UIColor.gray
+            searchBarTextField.placeholder = "Enter City Name for Weather Info."
         }else{
             citynameView.backgroundColor = UIColor.gray
             zipcodeView.backgroundColor = UIColor.init(red: 128, green: 92, blue: 230)
+            searchBarTextField.placeholder = "Enter Zipcode for Weather Info."
         }
     }
     
+    //load table View
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.viewModel?.searchBarInput.value = ""
+        self.searchBarTextField.text = ""
         self.startLoading()
         if (indexPath.row < 1){
-            
+            //start getting current location
             location?.requestWhenInUseAuthorization()
             if CLLocationManager.locationServicesEnabled() {
                 location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -232,6 +263,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             }
 
         }else{
+            //use past record to get weather information
             viewModel?.getWeatherByCityName(cityName:  (viewModel?.searchRecordFromRealm?[((viewModel?.searchRecordFromRealm?.count ?? 0)-indexPath.row)].searchString!)!){[weak self] (failReason) in
                 if let tempWeather = try? Realm().objects(WeatherResponse.self){
                     
@@ -265,6 +297,8 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
           return cell
     }
     
+    //control the table view size
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if recentSearchTableView.contentSize.height.isLess(than: 150){
@@ -272,9 +306,11 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         }
     }
     
+    //action when receive current location
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
         viewModel?.getWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
             if let tempWeather = try? Realm().objects(WeatherResponse.self){
                 
@@ -288,9 +324,6 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
 
         
     }
-    
-
-    
     
     //display keyboards when tapped other views
     @objc func scrollViewTapped() {
@@ -339,7 +372,7 @@ class StartViewModel{
     func fetchWeatherFromRealm(){
         currentWeatherFromRealm = try? Realm().objects(WeatherResponse.self)
         currentWeather.value = try? Realm().objects(WeatherResponse.self).first
-        print( try? Realm().objects(WeatherResponse.self).first)
+//        print( try? Realm().objects(WeatherResponse.self).first)
     }
     
 }
