@@ -513,6 +513,7 @@
                         <outlet property="noRecordView" destination="cm4-Cl-qrT" id="2wn-z1-e4z"/>
                         <outlet property="recentSearchTableView" destination="2ix-Gt-bSK" id="0Hw-rK-gbS"/>
                         <outlet property="scrollView" destination="hLs-QP-PLM" id="dgG-Uq-Qvn"/>
+                        <outlet property="searchBarIconImageView" destination="ZNL-Nx-rvD" id="2h7-O3-niW"/>
                         <outlet property="searchBarTextField" destination="HjK-s6-ukW" id="skA-fK-kyQ"/>
                         <outlet property="searchBarView" destination="lGL-zj-MfZ" id="VOo-gY-TVr"/>
                         <outlet property="searchByView" destination="4oi-tg-N6L" id="cHE-y9-zB6"/>

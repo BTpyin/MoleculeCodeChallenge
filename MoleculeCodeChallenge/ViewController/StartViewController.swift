@@ -25,6 +25,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
     @IBOutlet weak var scrollView: UIScrollView!
 //  search bar
+    @IBOutlet weak var searchBarIconImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var searchBarTextField: UITextField!
     @IBOutlet weak var recentSearchTableView: UITableView!
@@ -187,6 +188,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
     func uiBind(){
         navigationItem.title = NSLocalizedString("title_Name", comment: "")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
         weatherCardView.roundCorners(cornerRadius: 25)
         weatherCardTopSection.roundCorners(cornerRadius: 25)
         noRecordView.roundCorners(cornerRadius: 15)
@@ -211,7 +213,8 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
               y: 0.4,
             blur: 5,
               spread: 0)
-        searchBarTextField.borderColor = UIColor.init(red: 128, green: 92, blue: 230)
+        searchBarIconImageView.tintColor = UIColor(named: "themeColor")
+        searchBarTextField.borderColor = UIColor(named: "themeColor")
         searchBarTextField.borderWidth = 1
         searchBarTextField.roundCorners(cornerRadius: 15)
         
@@ -237,12 +240,12 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
     func updateSearchBarAndSearchByViews(){
         if ((viewModel?.cityNameOn.value)!){
-            citynameView.backgroundColor = UIColor.init(red: 128, green: 92, blue: 230)
+            citynameView.backgroundColor = UIColor(named: "themeColor")
             zipcodeView.backgroundColor = UIColor.gray
             searchBarTextField.placeholder = NSLocalizedString("city_name_placeholder", comment: "")
         }else{
             citynameView.backgroundColor = UIColor.gray
-            zipcodeView.backgroundColor = UIColor.init(red: 128, green: 92, blue: 230)
+            zipcodeView.backgroundColor = UIColor(named: "themeColor")
             searchBarTextField.placeholder = NSLocalizedString("zip_code_placeholder", comment: "")
         }
     }
