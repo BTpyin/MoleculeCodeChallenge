@@ -79,12 +79,13 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         
 
         Observable.changeset(from: (viewModel?.searchRecordFromRealm)!).subscribe(onNext: { results in
-            self.determineDisplayNoRecordOrCardView()
+            
             self.recentSearchTableView.reloadData()
             print(self.viewModel?.searchRecordFromRealm)
         }).disposed(by: disposeBag)
         
         Observable.changeset(from: (viewModel?.currentWeatherFromRealm)!).subscribe(onNext: { results, changes in
+            self.determineDisplayNoRecordOrCardView()
             if let changes = changes {
               // it's an update
 //              print(results)
@@ -104,7 +105,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
               // it's the initial data
 //              print(results)
                 if (results.first?.cod != 200 ){
-                    self.showAlert(NSLocalizedString("not_valid_input", comment: ""))
+//                    self.showAlert(NSLocalizedString("not_valid_input", comment: ""))
                     self.stopLoading()
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
