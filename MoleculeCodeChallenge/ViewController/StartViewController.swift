@@ -91,7 +91,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
               print("inserted: \(changes.inserted)")
               print("updated: \(changes.updated)")
                 if (results.first?.cod != 200 ){
-                    self.showAlert("The input is not a valid value.")
+                    self.showAlert(NSLocalizedString("not_valid_input", comment: ""))
                     self.stopLoading()
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
@@ -103,7 +103,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
               // it's the initial data
 //              print(results)
                 if (results.first?.cod != 200 ){
-                    self.showAlert("The input is not a valid value.")
+                    self.showAlert(NSLocalizedString("not_valid_input", comment: ""))
                     self.stopLoading()
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
@@ -186,7 +186,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     //uiBind
     
     func uiBind(){
-
+        navigationItem.title = NSLocalizedString("title_Name", comment: "")
         weatherCardView.roundCorners(cornerRadius: 25)
         weatherCardTopSection.roundCorners(cornerRadius: 25)
         noRecordView.roundCorners(cornerRadius: 15)
@@ -239,11 +239,11 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         if ((viewModel?.cityNameOn.value)!){
             citynameView.backgroundColor = UIColor.init(red: 128, green: 92, blue: 230)
             zipcodeView.backgroundColor = UIColor.gray
-            searchBarTextField.placeholder = "Enter City Name for Weather Info."
+            searchBarTextField.placeholder = NSLocalizedString("city_name_placeholder", comment: "")
         }else{
             citynameView.backgroundColor = UIColor.gray
             zipcodeView.backgroundColor = UIColor.init(red: 128, green: 92, blue: 230)
-            searchBarTextField.placeholder = "Enter Zipcode for Weather Info."
+            searchBarTextField.placeholder = NSLocalizedString("zip_code_placeholder", comment: "")
         }
     }
     
@@ -289,7 +289,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         cell.rowNum = indexPath.row
         if indexPath.row == 0{
             cell.cancelButton.isHidden = true
-            cell.locationLabel.text = "Current Location"
+            cell.locationLabel.text = NSLocalizedString("current_location", comment: "")
         }else{
             cell.cancelButton.isHidden = false
             cell.locationLabel.text = viewModel?.searchRecordFromRealm?[((viewModel?.searchRecordFromRealm?.count ?? 0)-indexPath.row)].searchString

@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "Min. Temp. :"; ObjectID = "2Ox-yh-eyG"; */
+"2Ox-yh-eyG.text" = "Min. Temp. :";
+
+/* Class = "UILabel"; text = "City Name"; ObjectID = "Fig-Ky-5jS"; */
+"Fig-Ky-5jS.text" = "City Name";
+
+/* Class = "UITextField"; placeholder = "City name/ City Zipcode"; ObjectID = "HjK-s6-ukW"; */
+"HjK-s6-ukW.placeholder" = "City name/ City Zipcode";
+
+/* Class = "UILabel"; text = "Try to type the city name/zipcode to get the current weather info. for the city."; ObjectID = "Ifb-pE-ntt"; */
+"Ifb-pE-ntt.text" = "Try to type the city name/zipcode to get the current weather info. for the city.";
+
+/* Class = "UILabel"; text = "30°C"; ObjectID = "RMn-xZ-5gK"; */
+"RMn-xZ-5gK.text" = "30°C";
+
+/* Class = "UILabel"; text = "30°C"; ObjectID = "S8S-li-NSD"; */
+"S8S-li-NSD.text" = "30°C";
+
+/* Class = "UILabel"; text = "2.57"; ObjectID = "TYl-oF-2Y4"; */
+"TYl-oF-2Y4.text" = "2.57";
+
+/* Class = "UILabel"; text = "Search by: "; ObjectID = "Yj1-vV-eSB"; */
+"Yj1-vV-eSB.text" = "Search by: ";
+
+/* Class = "UILabel"; text = "Current Temp. :"; ObjectID = "Z4W-M1-BOe"; */
+"Z4W-M1-BOe.text" = "Current Temp. :";
+
+/* Class = "UILabel"; text = "London"; ObjectID = "ZMu-Vj-PME"; */
+"ZMu-Vj-PME.text" = "London";
+
+/* Class = "UILabel"; text = "Feel like 33°C"; ObjectID = "atl-64-URG"; */
+"atl-64-URG.text" = "Feel like 33°C";
+
+/* Class = "UILabel"; text = "Max. Temp. :"; ObjectID = "bLn-wL-9wu"; */
+"bLn-wL-9wu.text" = "Max. Temp. :";
+
+/* Class = "UILabel"; text = "humidity :"; ObjectID = "bhj-rx-WLs"; */
+"bhj-rx-WLs.text" = "humidity :";
+
+/* Class = "UILabel"; text = "Zip Code"; ObjectID = "dEh-dA-Qxj"; */
+"dEh-dA-Qxj.text" = "Zip Code";
+
+/* Class = "UILabel"; text = "Wind degree :"; ObjectID = "eoD-MR-h1i"; */
+"eoD-MR-h1i.text" = "Wind degree :";
+
+/* Class = "UILabel"; text = "Wind Speed :"; ObjectID = "gCf-n7-2wr"; */
+"gCf-n7-2wr.text" = "Wind Speed :";
+
+/* Class = "UILabel"; text = "30°C"; ObjectID = "knJ-DF-f1Q"; */
+"knJ-DF-f1Q.text" = "30°C";
+
+/* Class = "UILabel"; text = "30°C"; ObjectID = "qsw-3R-DZx"; */
+"qsw-3R-DZx.text" = "30°C";
+
+/* Class = "UINavigationItem"; title = "BowWeather"; ObjectID = "spB-u6-ZRb"; */
+"spB-u6-ZRb.title" = "BowWeather";
+
+/* Class = "UILabel"; text = "Current Location"; ObjectID = "vT2-Ms-9u6"; */
+"vT2-Ms-9u6.text" = "Current Location";
+
+/* Class = "UILabel"; text = "260°"; ObjectID = "w8e-bi-rLp"; */
+"w8e-bi-rLp.text" = "260°";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "wiK-tM-KJQ"; */
+"wiK-tM-KJQ.text" = "Description";
+
+/* Class = "UILabel"; text = "70%"; ObjectID = "z12-Rw-YOC"; */
+"z12-Rw-YOC.text" = "70%";

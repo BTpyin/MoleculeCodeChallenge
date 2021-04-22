@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  MoleculeCodeChallenge
+
+  Created by Bowie Tso on 22/4/2021.
+  
+*/
+"title_Name" = "我的香港天氣";
+"api_localization_string" = "lang=zh_tw";
+"city_name_placeholder" = "輸入城市名稱以獲取天氣資訊";
+"zip_code_placeholder" = "輸入郵政編碼以獲取天氣資訊";
+"not_valid_input" = "輸入不正確";
+"current_location" = "現時位置";

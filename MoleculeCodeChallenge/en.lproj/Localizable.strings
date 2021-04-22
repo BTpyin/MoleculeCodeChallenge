@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  MoleculeCodeChallenge
+
+  Created by Bowie Tso on 22/4/2021.
+  
+*/
+"title_Name" = "My Weather";
+"api_localiztion" = "lang=en";
+"city_name_placeholder" = "Enter City Name for Weather Info";
+"zip_code_placeholder" = "Enter Zipcode for Weather Info";
+"not_valid_input" = "This is not a valid input";
+"current_location" = "Current Location";

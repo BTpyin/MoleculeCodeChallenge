@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  MoleculeCodeChallenge
+
+  Created by Bowie Tso on 22/4/2021.
+  
+*/
+"title_Name" = "我的中国天气";
+"api_localization_string" = "lang=zh_cn";
+"city_name_placeholder" = "输入城市名称以获取天气资讯";
+"zip_code_placeholder" = "输入邮政编码以获取天气资讯";
+"not_valid_input" = "输入不正确";
+"current_location" = "当前位置";
