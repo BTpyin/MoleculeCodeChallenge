@@ -14,13 +14,13 @@ class RecentSearchTableViewCell: UITableViewCell {
     
     var rowNum = 0
     
-    func removeRealmSearchRecord(record:String, completed: ((SyncDataFailReason?) -> Void)?){
-        SyncData().removeRecordToRealm(name: record, completed: completed)
-    }
-    
-    @IBAction func CancelButtonClicked(_ sender: Any) {
-        removeRealmSearchRecord(record: (self.locationLabel.text ?? "")){[weak self] (failReason) in
-            print(failReason)
-        }
-    }
+//    func removeRealmSearchRecord(record:String, completed: ((SyncDataFailReason?) -> Void)?){
+//        SyncData().removeRecordToRealm(name: record, completed: completed)
+//    }
+//
+//    @IBAction func CancelButtonClicked(_ sender: Any) {
+////        removeRealmSearchRecord(record: (self.locationLabel.text ?? "")){[weak self] (failReason) in
+////            print(failReason)
+////        }
+//    }
 }

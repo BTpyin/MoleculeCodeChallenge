@@ -77,11 +77,16 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             self.updateSearchBarAndSearchByViews()
         }).disposed(by: disposeBag)
         
-
+        viewModel?.tableViewVisible.subscribe(onNext:{ _ in
+            self.recentSearchTableView.isHidden = (self.viewModel?.tableViewVisible.value ?? false)
+        }).disposed(by: disposeBag)
+        
         Observable.changeset(from: (viewModel?.searchRecordFromRealm)!).subscribe(onNext: { results in
-            
             self.recentSearchTableView.reloadData()
-            print(self.viewModel?.searchRecordFromRealm)
+//            print(self.viewModel?.searchRecordFromRealm)
+            self.reloadInputViews()
+            self.view.updateConstraints()
+            self.viewLayoutMarginsDidChange()
         }).disposed(by: disposeBag)
         
         Observable.changeset(from: (viewModel?.currentWeatherFromRealm)!).subscribe(onNext: { results, changes in
@@ -89,9 +94,6 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             if let changes = changes {
               // it's an update
 //              print(results)
-              print("deleted: \(changes.deleted)")
-              print("inserted: \(changes.inserted)")
-              print("updated: \(changes.updated)")
                 if (results.first?.cod != 200 ){
                     self.showAlert(NSLocalizedString("not_valid_input", comment: ""))
                     self.stopLoading()
@@ -133,7 +135,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
                    }
-                  print(failReason)
+                  print(failReason?.localizedDescription)
             }
         }else{
             viewModel?.getWeatherByZipCode(zipCode: viewModel?.searchBarInput.value ?? ""){[weak self] (failReason) in
@@ -144,7 +146,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
                    }
-                  print(failReason)
+                print(failReason?.localizedDescription)
             }
             
         }
@@ -155,10 +157,12 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     }
     
     @IBAction func searchBarStartEditiing(_ sender: Any) {
-        recentSearchTableView.isHidden = false
+//        recentSearchTableView.isHidden = false
+        viewModel?.tableViewVisible.accept(false)
     }
     @IBAction func searchBarEndEditing(_ sender: Any) {
-        recentSearchTableView.isHidden = true
+//        recentSearchTableView.isHidden = true
+        viewModel?.tableViewVisible.accept(true)
     }
     
     @IBAction func cityNameClicked(_ sender: Any) {
@@ -298,6 +302,10 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             cell.cancelButton.isHidden = false
             cell.locationLabel.text = viewModel?.searchRecordFromRealm?[((viewModel?.searchRecordFromRealm?.count ?? 0)-indexPath.row)].searchString
         }
+        cell.cancelButton.rx.tap.subscribe(onNext:{_ in
+            SyncData().removeRecordToRealm(name: cell.locationLabel.text ?? "", completed: nil)
+            self.view.endEditing(true)
+        }).disposed(by: disposeBag)
           return cell
     }
     
@@ -347,6 +355,8 @@ class StartViewModel{
     var currentWeather = Variable<WeatherResponse?>(nil)
     var currentWeatherFromRealm: Results<WeatherResponse>?
     var searchRecordFromRealm: Results<SearchRecord>?
+    var tableViewVisible = BehaviorRelay<Bool>(value: true)
+    var searchRecords = BehaviorRelay<[SearchRecord]?>(value: [])
     var searchBarInput = Variable<String>("")
     
     func saveSearchRecord(searchRecord:String, completed: ((SyncDataFailReason?) -> Void)?){
