@@ -24,4 +24,18 @@ class RootRouter: Router{
         startViewController.hidesBottomBarWhenPushed = false
         navigationController?.pushViewController(startViewController, animated: false)
     }
+    
+    func show7Days(animated: Bool, complete: (() -> Void)? = nil ){
+        guard
+          let hourlyForecastViewController = UIStoryboard.storyboard(.main).instantiateViewController(HourlyForecastViewController.self) else {
+            return
+        }
+        //        let homeNavigationController = BaseNavigationController.init(rootViewController: homeViewController)
+        hourlyForecastViewController.router = self
+        //navigationController?.setNavigationBarHidden(true, animated: animated)
+    //        homeViewController.modalPresentationStyle = .fullScreen
+        hourlyForecastViewController.navigationController?.navigationBar.backItem?.hidesBackButton = false
+        hourlyForecastViewController.hidesBottomBarWhenPushed = false
+        navigationController?.pushViewController(hourlyForecastViewController, animated: false)
+    }
 }

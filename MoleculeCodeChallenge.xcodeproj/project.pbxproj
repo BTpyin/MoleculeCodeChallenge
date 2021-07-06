@@ -28,6 +28,9 @@
 		0E87C823262AD5C000C74817 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C822262AD5C000C74817 /* Api.swift */; };
 		0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C826262AD62200C74817 /* WeatherResponse.swift */; };
 		0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */; };
+		0E9AD9B82692E74D00EA20BA /* RootSevenDaysNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */; };
+		0E9AD9BA2692E81000EA20BA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9B92692E81000EA20BA /* TabBarController.swift */; };
+		0E9AD9BC2692E97300EA20BA /* HourlyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */; };
 		0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3199F262FF9D100286294 /* SearchRecord.swift */; };
 		0EE319A92631A8A300286294 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EE319AB2631A8A300286294 /* InfoPlist.strings */; };
 		56C27EA1FD9EA3F511589C6F /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */; };
@@ -62,6 +65,9 @@
 		0E87C822262AD5C000C74817 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0E87C826262AD62200C74817 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataToRealm.swift; sourceTree = "<group>"; };
+		0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSevenDaysNavigationController.swift; sourceTree = "<group>"; };
+		0E9AD9B92692E81000EA20BA /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewController.swift; sourceTree = "<group>"; };
 		0EE3199F262FF9D100286294 /* SearchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecord.swift; sourceTree = "<group>"; };
 		0EE319AA2631A8A300286294 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EE319AD2631A9A100286294 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 			children = (
 				0E4412FB262C6C7C001D08C6 /* BaseNavigationController.swift */,
 				0E4412FF262C6CD8001D08C6 /* RootNavigationController.swift */,
+				0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */,
+				0E9AD9B92692E81000EA20BA /* TabBarController.swift */,
 			);
 			path = NavigationController;
 			sourceTree = "<group>";
@@ -171,6 +179,7 @@
 				0E4412FA262C6C14001D08C6 /* NavigationController */,
 				0E87C7F8262ACFFF00C74817 /* BaseViewController.swift */,
 				0E441302262C6D86001D08C6 /* StartViewController.swift */,
+				0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -348,12 +357,15 @@
 				0E87C814262AD46900C74817 /* UIViewRoundCornerExtension.swift in Sources */,
 				0E4412F7262C6B3F001D08C6 /* RootRouter.swift in Sources */,
 				0E87C7F9262ACFFF00C74817 /* BaseViewController.swift in Sources */,
+				0E9AD9BC2692E97300EA20BA /* HourlyForecastViewController.swift in Sources */,
+				0E9AD9B82692E74D00EA20BA /* RootSevenDaysNavigationController.swift in Sources */,
 				0E4412F4262C6B1A001D08C6 /* Router.swift in Sources */,
 				0E87C81C262AD4DB00C74817 /* UIStoryboard+Create.swift in Sources */,
 				0E87C820262AD50400C74817 /* UIColorInitExtension.swift in Sources */,
 				0E49C687262C9F2800FD2670 /* RecentSearchTableViewCell.swift in Sources */,
 				0E441300262C6CD8001D08C6 /* RootNavigationController.swift in Sources */,
 				0E4412FC262C6C7C001D08C6 /* BaseNavigationController.swift in Sources */,
+				0E9AD9BA2692E81000EA20BA /* TabBarController.swift in Sources */,
 				0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */,
 				0E87C818262AD4A200C74817 /* UIViewDesignExtension.swift in Sources */,
 				0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */,
