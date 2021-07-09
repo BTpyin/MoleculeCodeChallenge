@@ -13,20 +13,20 @@ import RealmSwift
 import Kingfisher
 import CoreLocation
 
-class HourlyForecastViewController: BaseViewController {
+class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegate {
 
     var rootRouter: RootRouter? {
        return router as? RootRouter
      }
     var disposeBag = DisposeBag()
+    var viewModel : HourlyForecastViewModel?
+    var location : CLLocationManager?
     
     @IBOutlet weak var scrollView: UIScrollView!
 //  search bar
     @IBOutlet weak var searchBarIconImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var searchBarTextField: UITextField!
-    @IBOutlet weak var recentSearchTableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
 ////    Searchby Section
 //    @IBOutlet weak var searchByView: UIView!
@@ -48,6 +48,8 @@ class HourlyForecastViewController: BaseViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
  
+    @IBOutlet weak var slideBar: UISlider!
+    
     @IBOutlet weak var detailSectionStackView: UIStackView!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
@@ -58,10 +60,46 @@ class HourlyForecastViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = HourlyForecastViewModel()
+        location = CLLocationManager()
+        location?.delegate = self
+        startLoading()
+        viewModel?.fetchWeatherFromRealm()
         uiBind()
+        location?.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            location?.startUpdatingLocation()
+        }
+        
+//        weatherCardViewBind(weather: <#T##OneCallWeather#>)
         let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
         scrollView.addGestureRecognizer(scrollViewTap)
-        // Do any additional setup after loading the view.
+
+        Observable.changeset(from: ((viewModel?.currentWeatherFromRealm)!)).subscribe(onNext: { results in
+            self.slideBar.setValue(0, animated: true)
+        }).disposed(by: disposeBag)
+        
+        slideBar.rx.value.subscribe(onNext: { [self](value) in
+            let updatedValue = Int(value)
+//            print("updatedValue: \(updatedValue)")
+            if updatedValue == 0 {
+                weatherCardViewBind(weather: viewModel?.currentWeatherFromRealm?.first?.current ?? OneCallWeather())
+            }else{
+                weatherCardViewBind(weather:  (viewModel?.currentWeatherFromRealm?.first?.hourly[(updatedValue-1)] ?? OneCallWeather()))
+            }
+        }).disposed(by: disposeBag)
+        
+        locateButton.rx.tap.subscribe(onNext: { [self] _ in
+            location?.requestWhenInUseAuthorization()
+//            slideBar.setValue(0, animated: true)
+            slideBar.rx.value.onNext(0)
+            weatherCardViewBind(weather: viewModel?.currentWeatherFromRealm?.first?.current ?? OneCallWeather())
+            if CLLocationManager.locationServicesEnabled() {
+                location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+                location?.startUpdatingLocation()
+            }
+        }).disposed(by: disposeBag)
     }
     
     
@@ -70,9 +108,11 @@ class HourlyForecastViewController: BaseViewController {
     func uiBind(){
 //        navigationItem.title = NSLocalizedString("title_Name", comment: "")
         navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
+       
         weatherCardView.roundCorners(cornerRadius: 25)
         locateButton.roundCorners(cornerRadius: 5)
         locateButton.backgroundColor = UIColor(named: "themeColor")
+        locateButton.setTitleColor(.white, for: .normal)
         weatherCardTopSection.roundCorners(cornerRadius: 25)
         weatherCardView.layer.applySketchShadow(
           color: .black,
@@ -82,7 +122,29 @@ class HourlyForecastViewController: BaseViewController {
           blur: 6,
             spread: 0)
 
+        slideBar.tintColor = UIColor(named: "themeColor")
+    }
+    
+    func weatherCardViewBind(weather: OneCallWeather){
+        location?.stopUpdatingLocation()
+        locationLabel.text = viewModel?.currentWeatherFromRealm?.first?.timezone
+        tempLabel.text = "\(String(format: "%.1f", (weather.temp )))°C"
+        currentTempLabel.text = "\(String(format: "%.1f", (weather.temp )))°C"
+        feelLikeTempLabel.text = "Feels like \(String(format: "%.1f", (weather.feels_like )))°C"
+       
+        humidityLabel.text = "\(weather.humidity )"
+        windSpeedLabel.text = "\(weather.wind_speed )"
+        windDegreeLabel.text = "\(weather.wind_degree )°"
+        weatherIconImageView.kf.setImage(with: URL(string: "\(Api.imageLink)\(weather.weathers.first?.icon ?? "")@2x.png"))
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH"
+        dateLabel.text = dateFormatter.string(from: weather.dt)
+        timeLabel.text = "\(timeFormatter.string(from: weather.dt)):00"
+        
+        self.stopLoading()
     }
     
     //display keyboards when tapped other views
@@ -94,5 +156,37 @@ class HourlyForecastViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        viewModel?.getPredictedWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
+            if let tempWeather = try? Realm().objects(WeatherResponse.self){
+                
+                self?.view.endEditing(true)
+            }else{
+                self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
+
+               }
+              print(failReason)
+        }
+
+        
+    }
+
 
 }
+class HourlyForecastViewModel{
+    
+    var currentWeatherFromRealm: Results<OneCallWeatherResponse>?
+    
+    func fetchWeatherFromRealm(){
+        currentWeatherFromRealm = try? Realm().objects(OneCallWeatherResponse.self)
+    }
+    
+    func getPredictedWeatherByGps(lat:String, lon:String,completed: ((SyncDataFailReason?) -> Void)?){
+        SyncData().syncPredictedWeatherByGps(lat: lat, lon: lon, completed: completed)
+        fetchWeatherFromRealm()
+    }
+}
+

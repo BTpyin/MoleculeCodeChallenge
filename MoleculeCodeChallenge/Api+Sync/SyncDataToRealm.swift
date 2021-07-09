@@ -87,6 +87,30 @@ class SyncData {
 
     }
     
+    func syncPredictedWeatherByGps(lat: String, lon:String, completed:((SyncDataFailReason?) -> Void)?) {
+        let urlString = "\(Api.requestBasePath)onecall?lat=\(lat)&lon=\(lon)&units=metric&appid=\(Api.apiKey)"
+        if let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),let url = URL(string: encoded)
+         {
+            Alamofire.request(url, method: .get, encoding: URLEncoding.default, headers: nil).responseObject{ (response: DataResponse<OneCallWeatherResponse>)  in
+//                print(response.value)
+//                print(response.error.debugDescription)
+//                print(url)
+                guard let weatherResponse = response.result.value else{
+                    completed?(nil)
+                    return
+                }
+//                print((weatherResponse).weatherMain?.feels_like)
+                SyncData.writeRealmAsync({ (realm) in
+                    realm.delete(realm.objects(OneCallWeatherResponse.self))
+                    realm.add(weatherResponse)
+//                    print(realm.objects(WeatherResponse.self).first)
+                }, completed:{
+                    completed?(nil)
+                  })
+            }
+        }
+    }
+    
     
     
     func syncWeatherByCityId(cityName:String, completed:((SyncDataFailReason?) -> Void)?) {

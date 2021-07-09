@@ -31,6 +31,8 @@
 		0E9AD9B82692E74D00EA20BA /* RootSevenDaysNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */; };
 		0E9AD9BA2692E81000EA20BA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9B92692E81000EA20BA /* TabBarController.swift */; };
 		0E9AD9BC2692E97300EA20BA /* HourlyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */; };
+		0EDF6FBA26982DCC002A713A /* OneCallWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FB926982DCC002A713A /* OneCallWeatherResponse.swift */; };
+		0EDF6FBC26982F23002A713A /* OneCallWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FBB26982F23002A713A /* OneCallWeather.swift */; };
 		0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3199F262FF9D100286294 /* SearchRecord.swift */; };
 		0EE319A92631A8A300286294 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EE319AB2631A8A300286294 /* InfoPlist.strings */; };
 		56C27EA1FD9EA3F511589C6F /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */; };
@@ -68,6 +70,8 @@
 		0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSevenDaysNavigationController.swift; sourceTree = "<group>"; };
 		0E9AD9B92692E81000EA20BA /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewController.swift; sourceTree = "<group>"; };
+		0EDF6FB926982DCC002A713A /* OneCallWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallWeatherResponse.swift; sourceTree = "<group>"; };
+		0EDF6FBB26982F23002A713A /* OneCallWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallWeather.swift; sourceTree = "<group>"; };
 		0EE3199F262FF9D100286294 /* SearchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecord.swift; sourceTree = "<group>"; };
 		0EE319AA2631A8A300286294 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EE319AD2631A9A100286294 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 			children = (
 				0E87C826262AD62200C74817 /* WeatherResponse.swift */,
 				0EE3199F262FF9D100286294 /* SearchRecord.swift */,
+				0EDF6FB926982DCC002A713A /* OneCallWeatherResponse.swift */,
+				0EDF6FBB26982F23002A713A /* OneCallWeather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -361,9 +367,11 @@
 				0E9AD9B82692E74D00EA20BA /* RootSevenDaysNavigationController.swift in Sources */,
 				0E4412F4262C6B1A001D08C6 /* Router.swift in Sources */,
 				0E87C81C262AD4DB00C74817 /* UIStoryboard+Create.swift in Sources */,
+				0EDF6FBC26982F23002A713A /* OneCallWeather.swift in Sources */,
 				0E87C820262AD50400C74817 /* UIColorInitExtension.swift in Sources */,
 				0E49C687262C9F2800FD2670 /* RecentSearchTableViewCell.swift in Sources */,
 				0E441300262C6CD8001D08C6 /* RootNavigationController.swift in Sources */,
+				0EDF6FBA26982DCC002A713A /* OneCallWeatherResponse.swift in Sources */,
 				0E4412FC262C6C7C001D08C6 /* BaseNavigationController.swift in Sources */,
 				0E9AD9BA2692E81000EA20BA /* TabBarController.swift in Sources */,
 				0E87C841262C3E6600C74817 /* SyncDataToRealm.swift in Sources */,
