@@ -33,6 +33,8 @@
 		0E9AD9BC2692E97300EA20BA /* HourlyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */; };
 		0EDF6FBA26982DCC002A713A /* OneCallWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FB926982DCC002A713A /* OneCallWeatherResponse.swift */; };
 		0EDF6FBC26982F23002A713A /* OneCallWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FBB26982F23002A713A /* OneCallWeather.swift */; };
+		0EDF6FBF269858BE002A713A /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FBE269858BE002A713A /* StartViewModel.swift */; };
+		0EDF6FC12698590B002A713A /* HourlyForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FC02698590B002A713A /* HourlyForecastViewModel.swift */; };
 		0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3199F262FF9D100286294 /* SearchRecord.swift */; };
 		0EE319A92631A8A300286294 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EE319AB2631A8A300286294 /* InfoPlist.strings */; };
 		56C27EA1FD9EA3F511589C6F /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962422CEBEB2F48558EE67CE /* Pods_MoleculeCodeChallenge.framework */; };
@@ -72,6 +74,8 @@
 		0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewController.swift; sourceTree = "<group>"; };
 		0EDF6FB926982DCC002A713A /* OneCallWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallWeatherResponse.swift; sourceTree = "<group>"; };
 		0EDF6FBB26982F23002A713A /* OneCallWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallWeather.swift; sourceTree = "<group>"; };
+		0EDF6FBE269858BE002A713A /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		0EDF6FC02698590B002A713A /* HourlyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewModel.swift; sourceTree = "<group>"; };
 		0EE3199F262FF9D100286294 /* SearchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecord.swift; sourceTree = "<group>"; };
 		0EE319AA2631A8A300286294 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EE319AD2631A9A100286294 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 		0E87C7F3262ACFFF00C74817 /* MoleculeCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				0EDF6FBD2698589F002A713A /* ViewModel */,
 				0E4412F2262C6B0A001D08C6 /* Router */,
 				0E87C80F262AD3ED00C74817 /* Api+Sync */,
 				0E87C80A262AD38F00C74817 /* Model */,
@@ -218,6 +223,15 @@
 				0E87C840262C3E6600C74817 /* SyncDataToRealm.swift */,
 			);
 			path = "Api+Sync";
+			sourceTree = "<group>";
+		};
+		0EDF6FBD2698589F002A713A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EDF6FBE269858BE002A713A /* StartViewModel.swift */,
+				0EDF6FC02698590B002A713A /* HourlyForecastViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		1AAC38F1B3E1AB104CFB9005 /* Frameworks */ = {
@@ -358,9 +372,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E87C823262AD5C000C74817 /* Api.swift in Sources */,
+				0EDF6FBF269858BE002A713A /* StartViewModel.swift in Sources */,
 				0E441303262C6D86001D08C6 /* StartViewController.swift in Sources */,
 				0E87C827262AD62200C74817 /* WeatherResponse.swift in Sources */,
 				0E87C814262AD46900C74817 /* UIViewRoundCornerExtension.swift in Sources */,
+				0EDF6FC12698590B002A713A /* HourlyForecastViewModel.swift in Sources */,
 				0E4412F7262C6B3F001D08C6 /* RootRouter.swift in Sources */,
 				0E87C7F9262ACFFF00C74817 /* BaseViewController.swift in Sources */,
 				0E9AD9BC2692E97300EA20BA /* HourlyForecastViewController.swift in Sources */,

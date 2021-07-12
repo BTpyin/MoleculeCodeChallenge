@@ -65,7 +65,9 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
         location?.delegate = self
         startLoading()
         viewModel?.fetchWeatherFromRealm()
+        viewModel?.fetchForecastedWeatherFromRealm()
         uiBind()
+        
         location?.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -76,7 +78,7 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
         let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
         scrollView.addGestureRecognizer(scrollViewTap)
 
-        Observable.changeset(from: ((viewModel?.currentWeatherFromRealm)!)).subscribe(onNext: { results in
+        Observable.changeset(from: ((viewModel?.forecastedWeather)!)).subscribe(onNext: { results in
             self.slideBar.setValue(0, animated: true)
         }).disposed(by: disposeBag)
         
@@ -84,9 +86,9 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
             let updatedValue = Int(value)
 //            print("updatedValue: \(updatedValue)")
             if updatedValue == 0 {
-                weatherCardViewBind(weather: viewModel?.currentWeatherFromRealm?.first?.current ?? OneCallWeather())
+                weatherCardViewBind(weather: viewModel?.forecastedWeather?.first?.current ?? OneCallWeather())
             }else{
-                weatherCardViewBind(weather:  (viewModel?.currentWeatherFromRealm?.first?.hourly[(updatedValue-1)] ?? OneCallWeather()))
+                weatherCardViewBind(weather:  (viewModel?.forecastedWeather?.first?.hourly[(updatedValue-1)] ?? OneCallWeather()))
             }
         }).disposed(by: disposeBag)
         
@@ -94,7 +96,7 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
             location?.requestWhenInUseAuthorization()
 //            slideBar.setValue(0, animated: true)
             slideBar.rx.value.onNext(0)
-            weatherCardViewBind(weather: viewModel?.currentWeatherFromRealm?.first?.current ?? OneCallWeather())
+            weatherCardViewBind(weather: viewModel?.forecastedWeather?.first?.current ?? OneCallWeather())
             if CLLocationManager.locationServicesEnabled() {
                 location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
                 location?.startUpdatingLocation()
@@ -127,7 +129,7 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     
     func weatherCardViewBind(weather: OneCallWeather){
         location?.stopUpdatingLocation()
-        locationLabel.text = viewModel?.currentWeatherFromRealm?.first?.timezone
+        locationLabel.text = viewModel?.currentWeatherFromRealm?.first?.name
         tempLabel.text = "\(String(format: "%.1f", (weather.temp )))°C"
         currentTempLabel.text = "\(String(format: "%.1f", (weather.temp )))°C"
         feelLikeTempLabel.text = "Feels like \(String(format: "%.1f", (weather.feels_like )))°C"
@@ -160,7 +162,7 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
 //        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        viewModel?.getPredictedWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
+        viewModel?.getWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
             if let tempWeather = try? Realm().objects(WeatherResponse.self){
                 
                 self?.view.endEditing(true)
@@ -168,7 +170,19 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
                 self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
                }
-              print(failReason)
+            print(failReason?.localizedDescription)
+        }
+        viewModel?.getPredictedWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
+            
+            
+            if let tempWeather = try? Realm().objects(WeatherResponse.self){
+                
+                self?.view.endEditing(true)
+            }else{
+                self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
+
+               }
+            print(failReason?.localizedDescription)
         }
 
         
@@ -176,17 +190,5 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
 
 
 }
-class HourlyForecastViewModel{
-    
-    var currentWeatherFromRealm: Results<OneCallWeatherResponse>?
-    
-    func fetchWeatherFromRealm(){
-        currentWeatherFromRealm = try? Realm().objects(OneCallWeatherResponse.self)
-    }
-    
-    func getPredictedWeatherByGps(lat:String, lon:String,completed: ((SyncDataFailReason?) -> Void)?){
-        SyncData().syncPredictedWeatherByGps(lat: lat, lon: lon, completed: completed)
-        fetchWeatherFromRealm()
-    }
-}
+
 
