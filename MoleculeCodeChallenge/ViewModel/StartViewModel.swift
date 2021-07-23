@@ -42,6 +42,7 @@ class StartViewModel{
     
     func fetchRecordFromRealm(){
         searchRecordFromRealm = try? Realm().objects(SearchRecord.self)
+        searchRecords.accept(searchRecordFromRealm?.toArray())
     }
     
     func fetchWeatherFromRealm(){

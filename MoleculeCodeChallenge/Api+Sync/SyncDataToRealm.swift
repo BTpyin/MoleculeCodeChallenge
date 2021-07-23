@@ -7,6 +7,8 @@
 
 
 import Foundation
+import RxSwift
+import RxCocoa
 import RealmSwift
 import Alamofire
 import ObjectMapper
@@ -186,6 +188,28 @@ class SyncData {
                   })
             }
         }
+    }
+    
+    func syncWeatherToGetNameByGps(lat: String, lon:String) -> BehaviorRelay<String>{
+        let responseString = BehaviorRelay<String>.init(value: "")
+        let urlString = "\(Api.requestBasePath)weather?lat=\(lat)&lon=\(lon)&units=metric&appid=\(Api.apiKey)"
+        if let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),let url = URL(string: encoded)
+         {
+            Alamofire.request(url, method: .get, encoding: URLEncoding.default, headers: nil).responseObject{ (response: DataResponse<WeatherResponse>)  in
+//                print(response.value)
+//                print(response.error.debugDescription)
+//                print(url)
+                guard let weatherResponse = response.result.value else{
+                    
+                    return
+                }
+                responseString.accept(weatherResponse.name ?? "")
+//                print((weatherResponse).weatherMain?.feels_like)
+                
+            }
+        }
+        return responseString
+        
     }
 
 

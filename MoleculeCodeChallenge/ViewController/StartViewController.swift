@@ -100,7 +100,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
                     self.viewModel?.saveSearchRecord(searchRecord: (self.viewModel?.searchBarInput.value)!){[weak self] (failReason) in
-                        print(failReason)
+                        print(failReason?.localizedDescription)
                     }
                 }
             } else {
@@ -112,7 +112,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
                     self.viewModel?.saveSearchRecord(searchRecord: (self.viewModel?.searchBarInput.value)!){[weak self] (failReason) in
-                        print(failReason)
+                        print(failReason?.localizedDescription)
                     }
                 }
             }
@@ -204,6 +204,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             y: 0.5,
           blur: 6,
             spread: 0)
+        
         weatherCardView.layer.applySketchShadow(
           color: .black,
           alpha: 0.4,
@@ -211,6 +212,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             y: 0.5,
           blur: 6,
             spread: 0)
+        
         recentSearchTableView.layer.applySketchShadow(
             color: .black,
             alpha: 0.3,

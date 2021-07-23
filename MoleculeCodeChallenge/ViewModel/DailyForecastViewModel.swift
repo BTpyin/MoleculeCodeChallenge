@@ -1,8 +1,8 @@
 //
-//  HourlyForecastViewModel.swift
+//  DailyForecastViewModel.swift
 //  MoleculeCodeChallenge
 //
-//  Created by Bowie Tso on 9/7/2021.
+//  Created by Bowie Tso on 14/7/2021.
 //
 
 import Foundation
@@ -10,15 +10,16 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-class HourlyForecastViewModel{
-    
+class DailyForecastViewModel{
     var forecastedWeather: Results<OneCallWeatherResponse>?
+    var dailyForecastWeather = BehaviorRelay<[DailyForecastedWeather]>(value: [])
     var currentWeatherFromRealm: Results<WeatherResponse>?
     var currentWeather = BehaviorRelay<WeatherResponse?>(value: nil)
     var currentWeatherString = BehaviorRelay<String>(value: "")
     
     func fetchForecastedWeatherFromRealm(){
         forecastedWeather = try? Realm().objects(OneCallWeatherResponse.self)
+        dailyForecastWeather.accept(forecastedWeather?.first?.daily.toArray() ?? [])
     }
     
     func fetchWeatherFromRealm(){
@@ -32,8 +33,8 @@ class HourlyForecastViewModel{
         fetchForecastedWeatherFromRealm()
     }
     
-//    func getCityNameByGps(lat:String, lon:String){
-//        SyncData().syncWeatherToGetNameByGps(lat: lat, lon: lon, completed: completed)
+//    func getWeatherByGps(lat:String, lon:String,completed: ((SyncDataFailReason?) -> Void)?){
+//        SyncData().syncWeatherByGps(lat: lat, lon: lon, completed: completed)
 //        fetchForecastedWeatherFromRealm()
 //    }
 }

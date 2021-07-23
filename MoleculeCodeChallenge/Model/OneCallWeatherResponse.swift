@@ -12,7 +12,7 @@ class OneCallWeatherResponse: Object, Mappable {
     
     @objc dynamic var current : OneCallWeather?
     var hourly = List<OneCallWeather>()
-    var daily = List<OneCallWeather>()
+    var daily = List<DailyForecastedWeather>()
     @objc dynamic var timezone: String?
     
     
@@ -33,7 +33,7 @@ class OneCallWeatherResponse: Object, Mappable {
           }
         }
         
-        var dailyWeathers: [OneCallWeather]?
+        var dailyWeathers: [DailyForecastedWeather]?
         dailyWeathers <- map["daily"]
         
         if let daily = dailyWeathers {

@@ -1,8 +1,8 @@
 //
-//  SevenDaysViewController.swift
+//  DailyForecastViewController.swift
 //  MoleculeCodeChallenge
 //
-//  Created by Bowie Tso on 5/7/2021.
+//  Created by Bowie Tso on 13/7/2021.
 //
 
 import UIKit
@@ -13,22 +13,22 @@ import RealmSwift
 import Kingfisher
 import CoreLocation
 
-class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegate {
-
+class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
+    
     var rootRouter: RootRouter? {
        return router as? RootRouter
      }
     var disposeBag = DisposeBag()
-    var viewModel : HourlyForecastViewModel?
     var location : CLLocationManager?
+    var viewModel: DailyForecastViewModel?
     
     @IBOutlet weak var scrollView: UIScrollView!
 //  search bar
     @IBOutlet weak var searchBarIconImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
-    @IBOutlet weak var searchBarTextField: UITextField!
     
-////    Searchby Section
+
+    ////    Searchby Section
 //    @IBOutlet weak var searchByView: UIView!
 //
 //    @IBOutlet weak var citynameView: UIView!
@@ -44,30 +44,25 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var weatherIconImageView: UIImageView!
-    @IBOutlet weak var feelLikeTempLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
- 
-    @IBOutlet weak var slideBar: UISlider!
-    
-    @IBOutlet weak var detailSectionStackView: UIStackView!
-    @IBOutlet weak var currentTempLabel: UILabel!
-    @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var minTempLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var windSpeedLabel: UILabel!
-    @IBOutlet weak var windDegreeLabel: UILabel!
+
+    @IBOutlet weak var weekDayCollectionView: UICollectionView!
     
     @IBOutlet weak var noRecordView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = HourlyForecastViewModel()
+        viewModel = DailyForecastViewModel()
         location = CLLocationManager()
         location?.delegate = self
+        weekDayCollectionView.delegate = self
+        weekDayCollectionView.dataSource = self
         startLoading()
         viewModel?.fetchWeatherFromRealm()
         viewModel?.fetchForecastedWeatherFromRealm()
         uiBind()
+        weekDayCollectionView.reloadData()
+        
         
         location?.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -75,51 +70,27 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
             location?.startUpdatingLocation()
         }
         
-//        weatherCardViewBind(weather: <#T##OneCallWeather#>)
-        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
-        scrollView.addGestureRecognizer(scrollViewTap)
-
-        Observable.changeset(from: ((viewModel?.forecastedWeather)!)).subscribe(onNext: { [self] results in
-            determineDisplayNoRecordOrCardView()
-            slideBar.setValue(0, animated: true)
-            weatherCardViewBind(weather: viewModel?.forecastedWeather?.first?.current ?? OneCallWeather())
-//            location?.stopUpdatingLocation()
-        }).disposed(by: disposeBag)
-        
-        slideBar.rx.value.subscribe(onNext: { [self](value) in
-            let updatedValue = Int(value)
-//            print("updatedValue: \(updatedValue)")
-            if updatedValue == 0 {
-                weatherCardViewBind(weather: viewModel?.forecastedWeather?.first?.current ?? OneCallWeather())
-            }else{
-                weatherCardViewBind(weather:  (viewModel?.forecastedWeather?.first?.hourly[(updatedValue-1)] ?? OneCallWeather()))
-            }
-        }).disposed(by: disposeBag)
-        
         locateButton.rx.tap.subscribe(onNext: { [self] _ in
             location?.requestWhenInUseAuthorization()
-//            slideBar.setValue(0, animated: true)
             startLoading()
-            slideBar.rx.value.onNext(0)
-            weatherCardViewBind(weather: viewModel?.forecastedWeather?.first?.current ?? OneCallWeather())
+            weatherCardViewBind(weather: viewModel?.dailyForecastWeather.value.first ?? DailyForecastedWeather())
             if CLLocationManager.locationServicesEnabled() {
                 location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
                 location?.startUpdatingLocation()
             }
         }).disposed(by: disposeBag)
+        
+        Observable.changeset(from: ((viewModel?.forecastedWeather)!)).subscribe(onNext: { [self] results in
+//        viewModel?.dailyForecastWeather.subscribe(onNext: { [self] results in
+            determineDisplayNoRecordOrCardView()
+            weatherCardViewBind(weather: viewModel?.dailyForecastWeather.value.first ?? DailyForecastedWeather())
+            self.weekDayCollectionView.reloadData()
+//            location?.stopUpdatingLocation()
+        }).disposed(by: disposeBag)
+        
+        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
+        scrollView.addGestureRecognizer(scrollViewTap)
     }
-    
-    func determineDisplayNoRecordOrCardView(){
-        if (viewModel?.forecastedWeather?.count == 0 ) ||  (self.viewModel?.currentWeatherString.value == ""){
-            noRecordView.isHidden = false
-            weatherCardView.isHidden = true
-        }else{
-            noRecordView.isHidden = true
-            weatherCardView.isHidden = false
-        }
-    }
-    
-    //uiBind
     
     func uiBind(){
 //        navigationItem.title = NSLocalizedString("title_Name", comment: "")
@@ -145,30 +116,30 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
             y: 0.5,
           blur: 6,
             spread: 0)
-        slideBar.tintColor = UIColor(named: "themeColor")
 
     }
     
-    func weatherCardViewBind(weather: OneCallWeather){
+    func weatherCardViewBind(weather: DailyForecastedWeather){
         location?.stopUpdatingLocation()
-        
-        tempLabel.text = "\(String(format: "%.1f", (weather.temp )))°C"
-        currentTempLabel.text = "\(String(format: "%.1f", (weather.temp )))°C"
-        feelLikeTempLabel.text = "Feels like \(String(format: "%.1f", (weather.feels_like )))°C"
-       
-        humidityLabel.text = "\(weather.humidity )"
-        windSpeedLabel.text = "\(weather.wind_speed )"
-        windDegreeLabel.text = "\(weather.wind_degree )°"
-        weatherIconImageView.kf.setImage(with: URL(string: "\(Api.imageLink)\(weather.weathers.first?.icon ?? "")@2x.png"))
+        tempLabel.text = "\(String(format: "%.1f", (weather.temp?.day ?? 0)))°C"
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH"
+        dateFormatter.dateFormat = "dd/MM/yyyy (EEE)"
+
         dateLabel.text = dateFormatter.string(from: weather.dt)
-        timeLabel.text = "\(timeFormatter.string(from: weather.dt)):00"
-        
+
+        self.updateViewConstraints()
         self.stopLoading()
+    }
+    
+    func determineDisplayNoRecordOrCardView(){
+        if (viewModel?.forecastedWeather?.count == 0 ) ||  (self.viewModel?.currentWeatherString.value == ""){
+            noRecordView.isHidden = false
+            weatherCardView.isHidden = true
+        }else{
+            noRecordView.isHidden = true
+            weatherCardView.isHidden = false
+        }
     }
     
     //display keyboards when tapped other views
@@ -181,12 +152,36 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
         view.endEditing(true)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        weatherCardViewBind(weather: viewModel?.dailyForecastWeather.value[indexPath.row] ?? DailyForecastedWeather())
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+//    {
+//
+//            return CGSize(width: (UIScreen.main.bounds.size.width)/7, height: 150)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel?.dailyForecastWeather.value.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cellIdentifier = "DailyForecastCollectionViewCell"
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? DailyForecastCollectionViewCell else {
+          fatalError("The dequeued cell is not an instance of DailyForecastCollectionViewCell.")
+        }
+        cell.dailyCellBtn.rx.tap.subscribe(onNext: { _ in
+            self.weatherCardViewBind(weather: self.viewModel?.dailyForecastWeather.value[indexPath.row] ?? DailyForecastedWeather())
+        }).disposed(by: disposeBag)
+        cell.uiBind(day: viewModel?.dailyForecastWeather.value[indexPath.row] ?? DailyForecastedWeather())
+        return cell
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//        print("locations = \(locValue.latitude) \(locValue.longitude)")
-//        viewModel?.getCityNameByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
-//            print(failReason?.localizedDescription)
-//        }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        self.location?.stopUpdatingLocation()
         SyncData().syncWeatherToGetNameByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)").map{
             self.locationLabel.text = $0
             self.viewModel?.currentWeatherString.accept($0)
@@ -194,10 +189,9 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
         
         }).disposed(by: disposeBag)
         
-        self.location?.stopUpdatingLocation()
+
+        
         viewModel?.getPredictedWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
-            
-            
             if let tempWeather = try? Realm().objects(WeatherResponse.self){
                 
                 self?.view.endEditing(true)
@@ -211,7 +205,4 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
         
     }
 
-
 }
-
-
