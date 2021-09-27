@@ -33,10 +33,8 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
 //    Searchby Section
     @IBOutlet weak var searchByView: UIView!
-    
     @IBOutlet weak var citynameView: UIView!
     @IBOutlet weak var zipcodeView: UIView!
-    
     @IBOutlet weak var noRecordView: UIView!
     
     //    Weather Card
@@ -116,7 +114,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     }
                 }
             }
-                    self.viewModel?.searchBarInput.value = ""
+                    self.viewModel?.searchBarInput.accept("")
                     self.searchBarTextField.text = ""
             
         }).disposed(by: disposeBag)
@@ -125,7 +123,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.startLoading()
-        viewModel?.searchBarInput.value = searchBarTextField.text ?? ""
+        viewModel?.searchBarInput.accept(searchBarTextField.text ?? "")
         if ((viewModel?.cityNameOn.value)!){
             viewModel?.getWeatherByCityName(cityName: viewModel?.searchBarInput.value ?? ""){[weak self] (failReason) in
                 if let tempWeather = try? Realm().objects(WeatherResponse.self){
@@ -261,7 +259,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.viewModel?.searchBarInput.value = ""
+        self.viewModel?.searchBarInput.accept("")
         self.searchBarTextField.text = ""
         self.startLoading()
         if (indexPath.row < 1){
@@ -305,7 +303,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             cell.locationLabel.text = viewModel?.searchRecordFromRealm?[((viewModel?.searchRecordFromRealm?.count ?? 0)-indexPath.row)].searchString
         }
         cell.cancelButton.rx.tap.subscribe(onNext:{_ in
-            SyncData().removeRecordToRealm(name: cell.locationLabel.text ?? "", completed: nil)
+            SyncData().removeRecordToRealm(name: cell.locationLabel.text ?? "", completed: {_ in self.recentSearchTableView.reloadData()})
             self.view.endEditing(true)
         }).disposed(by: disposeBag)
           return cell
@@ -327,16 +325,12 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
 //        print("locations = \(locValue.latitude) \(locValue.longitude)")
         viewModel?.getWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
             if let tempWeather = try? Realm().objects(WeatherResponse.self){
-                
                 self?.view.endEditing(true)
             }else{
                 self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
-
-               }
-              print(failReason)
+            }
+            print(failReason)
         }
-
-        
     }
     
     //display keyboards when tapped other views

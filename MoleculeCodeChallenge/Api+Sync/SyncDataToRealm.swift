@@ -70,7 +70,6 @@ class SyncData {
                 realm.add(SearchRecord.init(record: record),update: true)
                 realm.delete(realm.objects(SearchRecord.self).filter(blankPredicate))
             }
-            
 //            print(realm.objects(SearchRecord.self))
         }, completed:{
             completed?(nil)
@@ -199,10 +198,7 @@ class SyncData {
 //                print(response.value)
 //                print(response.error.debugDescription)
 //                print(url)
-                guard let weatherResponse = response.result.value else{
-                    
-                    return
-                }
+                guard let weatherResponse = response.result.value else{return}
                 responseString.accept(weatherResponse.name ?? "")
 //                print((weatherResponse).weatherMain?.feels_like)
                 

@@ -13,12 +13,12 @@ import RxCocoa
 class StartViewModel{
     var cityNameOn = Variable<Bool>(true)
     var zipCodeOn = Variable<Bool>(false)
-    var currentWeather = Variable<WeatherResponse?>(nil)
+    var currentWeather = BehaviorRelay<WeatherResponse?>(value: nil)
     var currentWeatherFromRealm: Results<WeatherResponse>?
     var searchRecordFromRealm: Results<SearchRecord>?
     var tableViewVisible = BehaviorRelay<Bool>(value: true)
     var searchRecords = BehaviorRelay<[SearchRecord]?>(value: [])
-    var searchBarInput = Variable<String>("")
+    var searchBarInput = BehaviorRelay<String>(value: "")
     
     func saveSearchRecord(searchRecord:String, completed: ((SyncDataFailReason?) -> Void)?){
         SyncData().addLocationRecordToRealm(record: searchRecord, completed: completed)
@@ -47,7 +47,7 @@ class StartViewModel{
     
     func fetchWeatherFromRealm(){
         currentWeatherFromRealm = try? Realm().objects(WeatherResponse.self)
-        currentWeather.value = try? Realm().objects(WeatherResponse.self).first
+        currentWeather.accept(try? Realm().objects(WeatherResponse.self).first)
 //        print( try? Realm().objects(WeatherResponse.self).first)
     }
     

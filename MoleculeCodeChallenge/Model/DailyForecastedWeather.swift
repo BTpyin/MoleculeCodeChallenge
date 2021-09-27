@@ -17,6 +17,7 @@ class DailyForecastedWeather: Object, Mappable {
     @objc dynamic var dt = Date()
     @objc dynamic var temp: ForecastedTemp?
     var weathers = List<Weather>()
+    var selected = false
     
     
     required convenience init?(map: Map) {

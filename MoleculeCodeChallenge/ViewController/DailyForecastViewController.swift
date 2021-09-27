@@ -26,16 +26,6 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
 //  search bar
     @IBOutlet weak var searchBarIconImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
-    
-
-    ////    Searchby Section
-//    @IBOutlet weak var searchByView: UIView!
-//
-//    @IBOutlet weak var citynameView: UIView!
-//    @IBOutlet weak var zipcodeView: UIView!
-//
-//    @IBOutlet weak var noRecordView: UIView!
-    
     @IBOutlet weak var locateButton: UIButton!
     //    Weather Card
     @IBOutlet weak var weatherCardView: UIView!
@@ -80,6 +70,7 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
             }
         }).disposed(by: disposeBag)
         
+//
         Observable.changeset(from: ((viewModel?.forecastedWeather)!)).subscribe(onNext: { [self] results in
 //        viewModel?.dailyForecastWeather.subscribe(onNext: { [self] results in
             determineDisplayNoRecordOrCardView()
@@ -122,12 +113,9 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
     func weatherCardViewBind(weather: DailyForecastedWeather){
         location?.stopUpdatingLocation()
         tempLabel.text = "\(String(format: "%.1f", (weather.temp?.day ?? 0)))°C"
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy (EEE)"
-
         dateLabel.text = dateFormatter.string(from: weather.dt)
-
         self.updateViewConstraints()
         self.stopLoading()
     }
@@ -147,13 +135,28 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
 //        print("scrollViewTapped")
             view.endEditing(true)
     }
-
+    
+    @objc func didMenuSelected() {
+//        self.weekDayCollectionView.reloadData()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
         weatherCardViewBind(weather: viewModel?.dailyForecastWeather.value[indexPath.row] ?? DailyForecastedWeather())
+        var i = 0
+        guard  let weatherList = viewModel?.dailyForecastWeather.value else {
+            return
+        }
+        for _ in weatherList{
+            viewModel?.dailyForecastWeather.value[i].selected = false
+            i += 1
+        }
+        viewModel?.dailyForecastWeather.value[indexPath.row].selected.toggle()
+        weekDayCollectionView.reloadDataWithoutScroll()
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -171,9 +174,7 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? DailyForecastCollectionViewCell else {
           fatalError("The dequeued cell is not an instance of DailyForecastCollectionViewCell.")
         }
-        cell.dailyCellBtn.rx.tap.subscribe(onNext: { _ in
-            self.weatherCardViewBind(weather: self.viewModel?.dailyForecastWeather.value[indexPath.row] ?? DailyForecastedWeather())
-        }).disposed(by: disposeBag)
+
         cell.uiBind(day: viewModel?.dailyForecastWeather.value[indexPath.row] ?? DailyForecastedWeather())
         return cell
     }
@@ -188,9 +189,7 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
         }.subscribe(onNext:{
         
         }).disposed(by: disposeBag)
-        
-
-        
+            
         viewModel?.getPredictedWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
             if let tempWeather = try? Realm().objects(WeatherResponse.self){
                 
@@ -201,8 +200,15 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
                }
 //            print(failReason?.localizedDescription)
         }
-
-        
     }
+}
 
+extension UICollectionView {
+
+    func reloadDataWithoutScroll() {
+        let offset = contentOffset
+        reloadData()
+        layoutIfNeeded()
+        setContentOffset(offset, animated: false)
+    }
 }

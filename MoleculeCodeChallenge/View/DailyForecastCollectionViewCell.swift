@@ -24,13 +24,13 @@ class DailyForecastCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         viewModel = DailyForecastCollectionViewCellViewModel()
-        viewModel?.cellSelectedState.subscribe(onNext:{ [self] _ in
-            if (self.viewModel?.cellSelectedState.value ?? false){
-                self.backgroundColor = UIColor(named: "btnSelectedColor")
-            }else{
-                self.backgroundColor = .white
-            }
-        }).disposed(by: disposeBag)
+//        viewModel?.cellSelectedState.subscribe(onNext:{ [self] _ in
+//            if (self.viewModel?.cellSelectedState.value ?? false){
+//                self.backgroundColor = UIColor(named: "btnSelectedColor")
+//            }else{
+//                self.backgroundColor = .white
+//            }
+//        }).disposed(by: disposeBag)
        // initialize what is needed
     }
     
@@ -43,6 +43,11 @@ class DailyForecastCollectionViewCell: UICollectionViewCell {
         dailyForecastMaxTemp.text = "\(String(format: "%.0f", (day.temp?.max ?? 0)))°C"
         dailyForecastMinTemp.text = "\(String(format: "%.0f", (day.temp?.min ?? 0)))°C"
         dailyImageView.kf.setImage(with: URL(string: "\(Api.imageLink)\(day.weathers.first?.icon ?? "")@2x.png"))
+        if (day.selected){
+            self.backgroundColor = UIColor(named: "btnSelectedColor")
+        }else{
+            self.backgroundColor = .white
+        }
     }
 }
 
