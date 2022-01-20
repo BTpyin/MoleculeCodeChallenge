@@ -191,7 +191,8 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     
     func uiBind(){
         navigationItem.title = NSLocalizedString("title_Name", comment: "")
-        navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
+//        navigationController?.navigationBar.backgroundColor = UIColor(named: "themeColor")
+        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "themeColor")
         weatherCardView.roundCorners(cornerRadius: 25)
         weatherCardTopSection.roundCorners(cornerRadius: 25)
         noRecordView.roundCorners(cornerRadius: 15)

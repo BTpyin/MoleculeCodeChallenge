@@ -123,8 +123,8 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     
     func uiBind(){
 //        navigationItem.title = NSLocalizedString("title_Name", comment: "")
-        navigationController?.navigationBar.barTintColor = UIColor(named: "themeColor")
-       
+//        navigationController?.navigationBar.backgroundColor = UIColor(named: "themeColor")
+        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "themeColor")
         weatherCardView.roundCorners(cornerRadius: 25)
         locateButton.roundCorners(cornerRadius: 5)
         locateButton.backgroundColor = UIColor(named: "themeColor")

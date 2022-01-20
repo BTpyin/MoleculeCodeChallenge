@@ -42,7 +42,7 @@
 		0EDF6FC5269D7C8D002A713A /* DailyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF6FC4269D7C8D002A713A /* DailyForecastViewController.swift */; };
 		0EE319A0262FF9D100286294 /* SearchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3199F262FF9D100286294 /* SearchRecord.swift */; };
 		0EE319A92631A8A300286294 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EE319AB2631A8A300286294 /* InfoPlist.strings */; };
-		2CC6CFC3AA969892764A0E09 /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CB7D933FCEA6BBEFF6E9E4 /* Pods_MoleculeCodeChallenge.framework */; };
+		C6020EECCC2112FD071DC1CF /* Pods_MoleculeCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 879618D8B566FD42C311003B /* Pods_MoleculeCodeChallenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,9 +99,9 @@
 		0EE319B72631AA0300286294 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		0EE319B82631AA0300286294 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0EE319B92631AA0300286294 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		5A96E4CB840469D0F19F41A9 /* Pods-MoleculeCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
-		DDE0410332512ECA18749589 /* Pods-MoleculeCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
-		F6CB7D933FCEA6BBEFF6E9E4 /* Pods_MoleculeCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoleculeCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57EEE0FE67C343D64B31A20C /* Pods-MoleculeCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		879618D8B566FD42C311003B /* Pods_MoleculeCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoleculeCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D73F89DBE9CE8BE6B1B97EF1 /* Pods-MoleculeCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoleculeCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CC6CFC3AA969892764A0E09 /* Pods_MoleculeCodeChallenge.framework in Frameworks */,
+				C6020EECCC2112FD071DC1CF /* Pods_MoleculeCodeChallenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +143,7 @@
 				0E87C7F3262ACFFF00C74817 /* MoleculeCodeChallenge */,
 				0E87C7F2262ACFFF00C74817 /* Products */,
 				F1125FA5E86BF7651689102B /* Pods */,
-				F192D728FEBCBEF8D1A1D69D /* Frameworks */,
+				9FAFF2B5CE2054489E2207E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,21 +249,21 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		9FAFF2B5CE2054489E2207E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				879618D8B566FD42C311003B /* Pods_MoleculeCodeChallenge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F1125FA5E86BF7651689102B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5A96E4CB840469D0F19F41A9 /* Pods-MoleculeCodeChallenge.debug.xcconfig */,
-				DDE0410332512ECA18749589 /* Pods-MoleculeCodeChallenge.release.xcconfig */,
+				D73F89DBE9CE8BE6B1B97EF1 /* Pods-MoleculeCodeChallenge.debug.xcconfig */,
+				57EEE0FE67C343D64B31A20C /* Pods-MoleculeCodeChallenge.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		F192D728FEBCBEF8D1A1D69D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F6CB7D933FCEA6BBEFF6E9E4 /* Pods_MoleculeCodeChallenge.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,11 +273,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E87C805262AD00100C74817 /* Build configuration list for PBXNativeTarget "MoleculeCodeChallenge" */;
 			buildPhases = (
-				74B2DAD68B61EE39B5D275FC /* [CP] Check Pods Manifest.lock */,
+				ADC9E5A9B71F3269F112D8EF /* [CP] Check Pods Manifest.lock */,
 				0E87C7ED262ACFFF00C74817 /* Sources */,
 				0E87C7EE262ACFFF00C74817 /* Frameworks */,
 				0E87C7EF262ACFFF00C74817 /* Resources */,
-				2E961BB58CE604F1A9B1A28B /* [CP] Embed Pods Frameworks */,
+				B4C78B7AACD43C632CEAD170 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -340,24 +340,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E961BB58CE604F1A9B1A28B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		74B2DAD68B61EE39B5D275FC /* [CP] Check Pods Manifest.lock */ = {
+		ADC9E5A9B71F3269F112D8EF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -377,6 +360,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4C78B7AACD43C632CEAD170 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoleculeCodeChallenge/Pods-MoleculeCodeChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -512,7 +512,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				EXCLUDED_ARCHS = "arm64 armv7s armv7";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -530,7 +529,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -576,7 +575,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXCLUDED_ARCHS = "arm64 armv7s armv7";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -588,7 +586,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -599,7 +596,7 @@
 		};
 		0E87C806262AD00100C74817 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A96E4CB840469D0F19F41A9 /* Pods-MoleculeCodeChallenge.debug.xcconfig */;
+			baseConfigurationReference = D73F89DBE9CE8BE6B1B97EF1 /* Pods-MoleculeCodeChallenge.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
@@ -624,7 +621,7 @@
 		};
 		0E87C807262AD00100C74817 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDE0410332512ECA18749589 /* Pods-MoleculeCodeChallenge.release.xcconfig */;
+			baseConfigurationReference = 57EEE0FE67C343D64B31A20C /* Pods-MoleculeCodeChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
