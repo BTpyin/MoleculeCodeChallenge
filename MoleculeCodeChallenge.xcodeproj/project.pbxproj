@@ -31,6 +31,7 @@
 		0E9AD9B82692E74D00EA20BA /* RootSevenDaysNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */; };
 		0E9AD9BA2692E81000EA20BA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9B92692E81000EA20BA /* TabBarController.swift */; };
 		0E9AD9BC2692E97300EA20BA /* HourlyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */; };
+		0ECAF073279962290006389A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ECAF072279962290006389A /* GoogleService-Info.plist */; };
 		0ED26163269EEE2E0037247E /* DailyForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED26162269EEE2E0037247E /* DailyForecastCollectionViewCell.swift */; };
 		0ED26165269EEE460037247E /* DailyForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED26164269EEE460037247E /* DailyForecastViewModel.swift */; };
 		0ED26167269EF0480037247E /* DailyForecastedWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED26166269EF0480037247E /* DailyForecastedWeather.swift */; };
@@ -76,6 +77,7 @@
 		0E9AD9B72692E74C00EA20BA /* RootSevenDaysNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSevenDaysNavigationController.swift; sourceTree = "<group>"; };
 		0E9AD9B92692E81000EA20BA /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0E9AD9BB2692E97300EA20BA /* HourlyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewController.swift; sourceTree = "<group>"; };
+		0ECAF072279962290006389A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0ED26162269EEE2E0037247E /* DailyForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastCollectionViewCell.swift; sourceTree = "<group>"; };
 		0ED26164269EEE460037247E /* DailyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewModel.swift; sourceTree = "<group>"; };
 		0ED26166269EF0480037247E /* DailyForecastedWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastedWeather.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		0E87C7F3262ACFFF00C74817 /* MoleculeCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				0ECAF072279962290006389A /* GoogleService-Info.plist */,
 				0E4412F2262C6B0A001D08C6 /* Router */,
 				0E87C80F262AD3ED00C74817 /* Api+Sync */,
 				0E87C80A262AD38F00C74817 /* Model */,
@@ -334,6 +337,7 @@
 				0EE319A92631A8A300286294 /* InfoPlist.strings in Resources */,
 				0E87C7FE262AD00100C74817 /* Assets.xcassets in Resources */,
 				0E87C7FC262ACFFF00C74817 /* Main.storyboard in Resources */,
+				0ECAF073279962290006389A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,7 +616,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bowie.MoleculeCodeChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bowie.MyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -633,7 +637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bowie.MoleculeCodeChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bowie.MyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

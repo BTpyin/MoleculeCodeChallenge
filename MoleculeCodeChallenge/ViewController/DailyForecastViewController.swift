@@ -11,9 +11,10 @@ import RxCocoa
 import RxRealm
 import RealmSwift
 import Kingfisher
+import GoogleMobileAds
 import CoreLocation
 
-class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
+class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, GADBannerViewDelegate{
     
     var rootRouter: RootRouter? {
        return router as? RootRouter
@@ -24,6 +25,7 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
     
     @IBOutlet weak var scrollView: UIScrollView!
 //  search bar
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var searchBarIconImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var locateButton: UIButton!
@@ -45,6 +47,12 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
         viewModel = DailyForecastViewModel()
         location = CLLocationManager()
         location?.delegate = self
+//        real banner view ad id:
+//        bannerView.adUnitID = "ca-app-pub-6202076106469630/9230208945"
+        //test banner view ad id:
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
         weekDayCollectionView.delegate = self
         weekDayCollectionView.dataSource = self
         startLoading()
@@ -53,6 +61,7 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
         uiBind()
         weekDayCollectionView.reloadData()
         
+        bannerView.load(GADRequest())
         
         location?.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {

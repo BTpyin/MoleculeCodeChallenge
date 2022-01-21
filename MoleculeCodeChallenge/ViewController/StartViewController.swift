@@ -11,9 +11,10 @@ import RxCocoa
 import RxRealm
 import RealmSwift
 import Kingfisher
+import GoogleMobileAds
 import CoreLocation
 
-class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
+class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, GADBannerViewDelegate{
 
     var rootRouter: RootRouter? {
        return router as? RootRouter
@@ -22,6 +23,8 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     var viewModel: StartViewModel?
     var location : CLLocationManager?
     var disposeBag = DisposeBag()
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var scrollView: UIScrollView!
 //  search bar
@@ -59,6 +62,12 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = StartViewModel()
+        //real banner view ad id:
+//        bannerView.adUnitID = "ca-app-pub-6202076106469630/9230208945"
+        //test banner view ad id:
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
         recentSearchTableView.delegate = self
         recentSearchTableView.dataSource = self
         searchBarTextField.delegate = self
@@ -98,7 +107,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
                     self.viewModel?.saveSearchRecord(searchRecord: (self.viewModel?.searchBarInput.value)!){[weak self] (failReason) in
-                        print(failReason?.localizedDescription)
+                        print(failReason?.localizedDescription ?? "")
                     }
                 }
             } else {
@@ -110,7 +119,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                 }else{
                     self.weatherCardViewBind(weather: (results.first)!)
                     self.viewModel?.saveSearchRecord(searchRecord: (self.viewModel?.searchBarInput.value)!){[weak self] (failReason) in
-                        print(failReason?.localizedDescription)
+                        print(failReason?.localizedDescription ?? "")
                     }
                 }
             }
@@ -133,7 +142,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
                    }
-                  print(failReason?.localizedDescription)
+                print(failReason?.localizedDescription ?? "")
             }
         }else{
             viewModel?.getWeatherByZipCode(zipCode: viewModel?.searchBarInput.value ?? ""){[weak self] (failReason) in
@@ -144,7 +153,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
                    }
-                print(failReason?.localizedDescription)
+                print(failReason?.localizedDescription ?? "")
             }
             
         }
@@ -223,6 +232,9 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         searchBarTextField.borderColor = UIColor(named: "themeColor")
         searchBarTextField.borderWidth = 1
         searchBarTextField.roundCorners(cornerRadius: 15)
+        
+
+        bannerView.load(GADRequest())
         
     }
     
@@ -330,8 +342,18 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             }else{
                 self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
             }
-            print(failReason)
+            print("\(String(describing: failReason))")
         }
+    }
+
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner loaded successfully")
+        
+    }
+
+    private func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("Fail to receive ads")
+        print(error)
     }
     
     //display keyboards when tapped other views

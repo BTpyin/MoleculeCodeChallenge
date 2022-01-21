@@ -11,9 +11,10 @@ import RxCocoa
 import RxRealm
 import RealmSwift
 import Kingfisher
+import GoogleMobileAds
 import CoreLocation
 
-class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegate {
+class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegate, GADBannerViewDelegate, GADFullScreenContentDelegate {
 
     var rootRouter: RootRouter? {
        return router as? RootRouter
@@ -22,6 +23,7 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     var viewModel : HourlyForecastViewModel?
     var location : CLLocationManager?
     
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var scrollView: UIScrollView!
 //  search bar
     @IBOutlet weak var searchBarIconImageView: UIImageView!
@@ -59,15 +61,39 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     @IBOutlet weak var windDegreeLabel: UILabel!
     
     @IBOutlet weak var noRecordView: UIView!
+    
+    private var interstitial: GADInterstitialAd?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = HourlyForecastViewModel()
+        //real banner view ad id:
+//        bannerView.adUnitID = "ca-app-pub-6202076106469630/9230208945"
+        //test banner view ad id:
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
         location = CLLocationManager()
         location?.delegate = self
         startLoading()
         viewModel?.fetchWeatherFromRealm()
         viewModel?.fetchForecastedWeatherFromRealm()
         uiBind()
+        
+        let adRequest = GADRequest()
+        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+                                        request: adRequest,
+                              completionHandler: { [self] ad, error in
+                                if let error = error {
+                                  print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                                  return
+                                }
+                                interstitial = ad
+                                interstitial?.fullScreenContentDelegate = self
+
+                              }
+            )
+
         
         location?.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -100,6 +126,12 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
             location?.requestWhenInUseAuthorization()
 //            slideBar.setValue(0, animated: true)
             startLoading()
+            if interstitial != nil {
+                interstitial?.present(fromRootViewController: self)
+            } else {
+              print("Ad wasn't ready")
+            }
+
             slideBar.rx.value.onNext(0)
             weatherCardViewBind(weather: viewModel?.forecastedWeather?.first?.current ?? OneCallWeather())
             if CLLocationManager.locationServicesEnabled() {
@@ -107,6 +139,8 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
                 location?.startUpdatingLocation()
             }
         }).disposed(by: disposeBag)
+        
+        bannerView.load(GADRequest())
     }
     
     func determineDisplayNoRecordOrCardView(){
@@ -180,6 +214,22 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    /// Tells the delegate that the ad failed to present full screen content.
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+      print("Ad did fail to present full screen content.")
+    }
+
+    /// Tells the delegate that the ad presented full screen content.
+    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+      print("Ad did present full screen content.")
+    }
+
+    /// Tells the delegate that the ad dismissed full screen content.
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+      print("Ad did dismiss full screen content.")
+    }
+
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }

@@ -13,6 +13,8 @@ target 'MoleculeCodeChallenge' do
 	pod 'SwiftyJSON', '~> 4.0'
 	pod 'RxRealm'
 	pod 'Kingfisher', '~> 4.0'
+  pod 'Firebase/Core'
+  pod 'Google-Mobile-Ads-SDK'
   # Pods for MoleculeCodeChallenge
 
 end

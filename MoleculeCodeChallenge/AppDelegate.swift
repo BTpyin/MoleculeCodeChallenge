@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import AppTrackingTransparency
+import Firebase
+import FirebaseAnalytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        setATT()
         if #available(iOS 13.0, *) {
             let navbarAppearance = UINavigationBarAppearance()
             navbarAppearance.configureWithTransparentBackground()
@@ -24,8 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().scrollEdgeAppearance = navbarAppearance
             UINavigationBar.appearance().compactAppearance = navbarAppearance
         }
-        
+        FirebaseApp.configure()
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["4675eb4d85b45838199da6591d14bd63"]
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        setATT()
+        
     }
 
     // MARK: UISceneSession Lifecycle
@@ -42,6 +54,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func setATT() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    NSLog("notDetermined")
+                case .restricted:
+                    NSLog("restricted")
+                case .denied:
+                    NSLog("denied")
+                case .authorized:
+                    NSLog("authorized")
+                @unknown default:
+                    NSLog("unknown")
+                }
+            }
+        }
+    }
+    
+    
 }
 
