@@ -63,11 +63,11 @@ class SyncData {
             let predicate = NSPredicate(format: "searchString = %@", record)
             let blankPredicate = NSPredicate(format: "searchString = %@", "")
             if (realm.objects(SearchRecord.self).filter(predicate).first == nil){
-                realm.add(SearchRecord.init(record: record),update: true)
+                realm.add(SearchRecord.init(record: record),update: .all)
                 realm.delete(realm.objects(SearchRecord.self).filter(blankPredicate))
             }else{
                 realm.delete(realm.objects(SearchRecord.self).filter(predicate))
-                realm.add(SearchRecord.init(record: record),update: true)
+                realm.add(SearchRecord.init(record: record),update: .all)
                 realm.delete(realm.objects(SearchRecord.self).filter(blankPredicate))
             }
 //            print(realm.objects(SearchRecord.self))

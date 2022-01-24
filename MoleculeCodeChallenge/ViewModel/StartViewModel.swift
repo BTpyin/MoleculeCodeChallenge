@@ -11,8 +11,8 @@ import RealmSwift
 import RxCocoa
 
 class StartViewModel{
-    var cityNameOn = Variable<Bool>(true)
-    var zipCodeOn = Variable<Bool>(false)
+    var cityNameOn = BehaviorRelay<Bool>(value: true)
+    var zipCodeOn = BehaviorRelay<Bool>(value: false)
     var currentWeather = BehaviorRelay<WeatherResponse?>(value: nil)
     var currentWeatherFromRealm: Results<WeatherResponse>?
     var searchRecordFromRealm: Results<SearchRecord>?
@@ -27,17 +27,15 @@ class StartViewModel{
     
     func getWeatherByGps(lat:String, lon:String,completed: ((SyncDataFailReason?) -> Void)?){
         SyncData().syncWeatherByGps(lat: lat, lon: lon, completed: completed)
-        fetchWeatherFromRealm()
+//        fetchWeatherFromRealm()
     }
     
     func getWeatherByZipCode(zipCode:String, completed: ((SyncDataFailReason?) -> Void)?){
         SyncData().syncWeatherByZipcode(zipCode: zipCode, completed: completed)
-        fetchWeatherFromRealm()
     }
     
     func getWeatherByCityName(cityName:String, completed: ((SyncDataFailReason?) -> Void)?){
         SyncData().syncWeatherByCityId(cityName: cityName, completed: completed)
-        fetchWeatherFromRealm()
     }
     
     func fetchRecordFromRealm(){

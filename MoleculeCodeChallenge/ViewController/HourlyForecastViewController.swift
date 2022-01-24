@@ -105,6 +105,22 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
         let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
         scrollView.addGestureRecognizer(scrollViewTap)
 
+        setupObservalblebinding()
+        bannerView.load(GADRequest())
+    }
+    
+    func determineDisplayNoRecordOrCardView(){
+        if (viewModel?.forecastedWeather?.count == 0 ) ||  (self.viewModel?.currentWeatherString.value == ""){
+            noRecordView.isHidden = false
+            weatherCardView.isHidden = true
+        }else{
+            noRecordView.isHidden = true
+            weatherCardView.isHidden = false
+        }
+    }
+    
+    func setupObservalblebinding(){
+        
         Observable.changeset(from: ((viewModel?.forecastedWeather)!)).subscribe(onNext: { [self] results in
             determineDisplayNoRecordOrCardView()
             slideBar.setValue(0, animated: true)
@@ -139,18 +155,6 @@ class HourlyForecastViewController: BaseViewController, CLLocationManagerDelegat
                 location?.startUpdatingLocation()
             }
         }).disposed(by: disposeBag)
-        
-        bannerView.load(GADRequest())
-    }
-    
-    func determineDisplayNoRecordOrCardView(){
-        if (viewModel?.forecastedWeather?.count == 0 ) ||  (self.viewModel?.currentWeatherString.value == ""){
-            noRecordView.isHidden = false
-            weatherCardView.isHidden = true
-        }else{
-            noRecordView.isHidden = true
-            weatherCardView.isHidden = false
-        }
     }
     
     //uiBind

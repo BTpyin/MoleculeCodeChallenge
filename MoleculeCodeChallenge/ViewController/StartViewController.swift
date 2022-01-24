@@ -80,6 +80,16 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         viewModel?.fetchWeatherFromRealm()
         viewModel?.fetchRecordFromRealm()
         
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .automatic
+        } else {
+            automaticallyAdjustsScrollViewInsets = true;
+        }
+        
+        setupObservableBinding()
+    }
+    
+    func setupObservableBinding(){
         viewModel?.cityNameOn.asObservable().subscribe(onNext:{ _ in
             self.updateSearchBarAndSearchByViews()
         }).disposed(by: disposeBag)
@@ -98,9 +108,10 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         
         Observable.changeset(from: (viewModel?.currentWeatherFromRealm)!).subscribe(onNext: { results, changes in
             self.determineDisplayNoRecordOrCardView()
-            if let changes = changes {
+            if changes != nil {
               // it's an update
 //              print(results)
+               
                 if (results.first?.cod != 200 ){
                     self.showAlert(NSLocalizedString("not_valid_input", comment: ""))
                     self.stopLoading()
@@ -108,6 +119,10 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     self.weatherCardViewBind(weather: (results.first)!)
                     self.viewModel?.saveSearchRecord(searchRecord: (self.viewModel?.searchBarInput.value)!){[weak self] (failReason) in
                         print(failReason?.localizedDescription ?? "")
+                        if failReason != nil{
+                            self?.showErrorAlert(reason: .realmWrite, showCache: true, okClicked: nil)
+                            
+                        }
                     }
                 }
             } else {
@@ -127,17 +142,17 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
                     self.searchBarTextField.text = ""
             
         }).disposed(by: disposeBag)
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.startLoading()
         viewModel?.searchBarInput.accept(searchBarTextField.text ?? "")
-        if ((viewModel?.cityNameOn.value)!){
+        guard let cityNameOnFlag = viewModel?.cityNameOn.value else {return false}
+        if (cityNameOnFlag){
             viewModel?.getWeatherByCityName(cityName: viewModel?.searchBarInput.value ?? ""){[weak self] (failReason) in
                 if let tempWeather = try? Realm().objects(WeatherResponse.self){
                     
-
+                    self?.viewModel?.fetchWeatherFromRealm()
                 }else{
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
@@ -148,7 +163,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
             viewModel?.getWeatherByZipCode(zipCode: viewModel?.searchBarInput.value ?? ""){[weak self] (failReason) in
                 if let tempWeather = try? Realm().objects(WeatherResponse.self){
                     
-
+                    self?.viewModel?.fetchWeatherFromRealm()
                 }else{
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
@@ -173,20 +188,20 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
     }
     
     @IBAction func cityNameClicked(_ sender: Any) {
-        viewModel?.cityNameOn.value.toggle()
-        viewModel?.zipCodeOn.value.toggle()
+        viewModel?.cityNameOn.accept(!(viewModel?.cityNameOn.value ?? false))
+        viewModel?.zipCodeOn.accept(!(viewModel?.zipCodeOn.value ?? true))
     }
     
     @IBAction func zipcodeClicked(_ sender: Any) {
-        viewModel?.cityNameOn.value.toggle()
-        viewModel?.zipCodeOn.value.toggle()
+        viewModel?.cityNameOn.accept(!(viewModel?.cityNameOn.value ?? true))
+        viewModel?.zipCodeOn.accept(!(viewModel?.zipCodeOn.value ?? false))
     }
     
     func determineDisplayNoRecordOrCardView(){
         let recordCount = self.viewModel?.searchRecordFromRealm?.count ?? 0
         let weatherCount = self.viewModel?.currentWeatherFromRealm?.count ?? 0
-        print(self.viewModel?.currentWeatherFromRealm?.count)
-        print(self.viewModel?.searchRecordFromRealm?.count)
+        print("\(self.viewModel?.currentWeatherFromRealm?.count ?? 0)")
+        print("\(self.viewModel?.searchRecordFromRealm?.count ?? 0 )")
         if (((recordCount) == 0) && (weatherCount) == 0){
             self.weatherCardView.isHidden = true
             self.noRecordView.isHidden = false
@@ -257,7 +272,8 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
 
     
     func updateSearchBarAndSearchByViews(){
-        if ((viewModel?.cityNameOn.value)!){
+        guard let cityNameOnFlag = viewModel?.cityNameOn.value else {return}
+        if (cityNameOnFlag){
             citynameView.backgroundColor = UIColor(named: "themeColor")
             zipcodeView.backgroundColor = UIColor.gray
             searchBarTextField.placeholder = NSLocalizedString("city_name_placeholder", comment: "")
@@ -285,15 +301,15 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
 
         }else{
             //use past record to get weather information
-            viewModel?.getWeatherByCityName(cityName:  (viewModel?.searchRecordFromRealm?[((viewModel?.searchRecordFromRealm?.count ?? 0)-indexPath.row)].searchString!)!){[weak self] (failReason) in
+            viewModel?.getWeatherByCityName(cityName:  (viewModel?.searchRecordFromRealm?[((viewModel?.searchRecordFromRealm?.count ?? 0)-indexPath.row)].searchString ?? "") ){[weak self] (failReason) in
                 if let tempWeather = try? Realm().objects(WeatherResponse.self){
-                    
+                    self?.viewModel?.fetchWeatherFromRealm()
                     self?.view.endEditing(true)
                 }else{
                     self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
 
                    }
-                  print(failReason)
+                print(failReason?.localizedDescription ?? "")
             }
         }
     }
@@ -339,6 +355,7 @@ class StartViewController: BaseViewController, UITextFieldDelegate, UITableViewD
         viewModel?.getWeatherByGps(lat: "\(locValue.latitude)", lon:  "\(locValue.longitude)"){[weak self] (failReason) in
             if let tempWeather = try? Realm().objects(WeatherResponse.self){
                 self?.view.endEditing(true)
+                self?.viewModel?.fetchWeatherFromRealm()
             }else{
                 self?.showErrorAlert(reason: failReason, showCache: true, okClicked: nil)
             }

@@ -21,7 +21,6 @@ class BaseNavigationController: UINavigationController {
       override func viewDidLoad() {
         super.viewDidLoad()
 
-        automaticallyAdjustsScrollViewInsets = true
         
       }
 

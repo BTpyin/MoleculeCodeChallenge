@@ -68,6 +68,14 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
             location?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
             location?.startUpdatingLocation()
         }
+
+        setupObservalblebinding()
+        
+        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
+        scrollView.addGestureRecognizer(scrollViewTap)
+    }
+    
+    func setupObservalblebinding(){
         
         locateButton.rx.tap.subscribe(onNext: { [self] _ in
             location?.requestWhenInUseAuthorization()
@@ -87,9 +95,6 @@ class DailyForecastViewController: BaseViewController, CLLocationManagerDelegate
             self.weekDayCollectionView.reloadData()
 //            location?.stopUpdatingLocation()
         }).disposed(by: disposeBag)
-        
-        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
-        scrollView.addGestureRecognizer(scrollViewTap)
     }
     
     func uiBind(){
